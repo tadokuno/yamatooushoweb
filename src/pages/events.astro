@@ -1,0 +1,87 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+import events from '../data/events.json';
+
+const sortedEvents = events.sort((a, b) => new Date(b.date) - new Date(a.date));
+const upcomingEvents = sortedEvents.filter(event => event.status === 'upcoming');
+const pastEvents = sortedEvents.filter(event => event.status === 'past');
+---
+
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>イベント - やまと王将 将棋処</title>
+    <meta name="description" content="やまと王将 将棋処のイベント情報。最新イベントや過去の対局会をチェック。" />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <section class="events">
+        <h1>イベント</h1>
+        <div class="upcoming-events">
+          <h2>近日中のイベント</h2>
+          {upcomingEvents.length > 0 ? (
+            upcomingEvents.map(event => (
+              <article class="event-card">
+                <img src={event.image} alt={event.title} width="800" height="400" />
+                <h3>{event.title}</h3>
+                <p><strong>日時:</strong> {event.date} {event.time}</p>
+                <p>{event.description}</p>
+                <a href="/reserve" class="cta-button">参加予約</a>
+              </article>
+            ))
+          ) : (
+            <p>近日中のイベントは予定されていません。</p>
+          )}
+        </div>
+        <div class="past-events">
+          <h2>過去のイベント</h2>
+          {pastEvents.map(event => (
+            <article class="event-card">
+              <img src={event.image} alt={event.title} width="800" height="400" />
+              <h3>{event.title}</h3>
+              <p><strong>日時:</strong> {event.date} {event.time}</p>
+              <p>{event.description}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style>
+  .events {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  .upcoming-events, .past-events {
+    margin: 20px 0;
+  }
+  .event-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+    padding: 20px;
+  }
+  .event-card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+  .cta-button {
+    background-color: #d32f2f;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    display: inline-block;
+  }
+</style>

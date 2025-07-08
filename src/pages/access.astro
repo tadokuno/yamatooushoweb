@@ -1,0 +1,74 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+---
+
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <Layout title>アクセス - やまと王将 将棋処</title>
+    <meta name="description" content="将棋処 やまと王将のアクセス情報。東京都新宿区の将棋カフェへの行き方をご案内。" />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <section class="access">
+        <h1>アクセス</h1>
+        <div class="access-info">
+          <h2>将棋処 やまと王将</h2>
+          <p><strong>住所:</strong> 〒242-0018 神奈川県大和市深見西２丁目-１-２ ホソノビル 2F</p>
+          <p><strong>営業日:</strong> 木・金・土・日および祝日</p>
+          <p><strong>営業時間:</strong> 13:00～20:00</p>
+          <p><strong>電話:</strong> 090-8431-1107</p>
+          <p><strong>最寄り駅:</strong> 小田急線・相鉄線 大和駅 徒歩7分</p>
+        </div>
+        <div class="map-container">
+          <h2>Googleマップ</h2>
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6498.371040752466!2d139.45959901115296!3d35.474953441164075!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x601856147134272d%3A0x3db2494a376bb0fc!2z44KE44G-44Go546L5bCG!5e0!3m2!1sja!2sjp!4v1750846715752!5m2!1sja!2sjp"
+            width="600"
+            height="1000" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
+        <div class="simple-map">
+          <h2>簡単な地図</h2>
+          <img src="/images/simple-map.png" alt="やまと王将への地図" width="600" height="400" />
+        </div>
+      </section>
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style>
+  .access {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  .access-info {
+    margin-bottom: 20px;
+  }
+  .map-container,
+  .simple-map {
+    margin: 20px 0;
+  }
+  .map-container iframe,
+  .simple-map img {
+    max-width: 100%;
+    height: auto;
+  }
+  h1, h2 {
+    color: #333;
+  }
+  p {
+    line-height: 1.6;
+  }
+</style>

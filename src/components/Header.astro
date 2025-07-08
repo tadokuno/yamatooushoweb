@@ -1,0 +1,48 @@
+<---
+import logo from '../../public/images/yamatoosho.png'; // ロゴ画像のパス
+---
+
+<header>
+  <div class="header-container">
+    <a href="/" class="logo">
+      <img src={logo.src} alt="やまと王将ロゴ" width="150" height="50" />
+    </a>
+    <nav>
+      <a href="/">ホーム</a>
+      <a href="/services">サービス</a>
+      <a href="/events">イベント</a>
+      <a href="/access">アクセス</a>
+      <a href="/about">やまと王将について</a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  header {
+    background-color: white;
+    padding: 10px 0;
+  }
+  .header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo img {
+    width: 150px;
+    height: 50px;
+  }
+  nav {
+    display: flex;
+    gap: 15px;
+  }
+  nav a {
+    color: black;
+    text-decoration: none;
+    font-size: 16px;
+  }
+  nav a:hover {
+    text-decoration: underline;
+  }
+</style>

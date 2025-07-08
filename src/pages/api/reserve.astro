@@ -1,0 +1,23 @@
+---
+export async function POST({ request }) {
+  const data = await request.json();
+  // Cloudflare KVやD1に保存（例）
+  console.log('予約データ:', data);
+  return new Response(JSON.stringify({ message: '予約を受け付けました' }), {
+    status: 200,
+    headers: { 'Content-Type': 'application/json' },
+  });
+}
+---
+
+<script>
+  async function submitReservation() {
+    const response = await fetch('/api/reserve', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: 'ユーザー名', date: '2025-07-01' }),
+    });
+    const result = await response.json();
+    alert(result.message);
+  }
+</script>
