@@ -1,15 +1,6 @@
-// @ts-check
 import { defineConfig } from 'astro/config';
 
-import cloudflare from '@astrojs/cloudflare';
-
-// https://astro.build/config
 export default defineConfig({
-  adapter: cloudflare({
-    platformProxy: {
-      enabled: true
-    },
-
-    imageService: "cloudflare"
-  })
+  output: 'static', // 静的サイト生成
+  // アダプターは不要（静的サイト）
 });
