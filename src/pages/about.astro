@@ -1,0 +1,378 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+---
+
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <Layout />
+    <meta name="description" content="やまと王将について。将棋を愛する人たちが集まる、アットホームな将棋処です。初心者から有段者まで、どなたでも楽しめる空間を提供しています。" />
+    <title>やまと王将について | やまと王将</title>
+  </head>
+  <body>
+    <Header />
+    <main>
+      <section class="hero">
+        <h1>やまと王将について</h1>
+        <p class="hero-subtitle">将棋を愛するすべての人に開かれた場所</p>
+      </section>
+      
+      <section class="story">
+        <div class="container">
+          <h2>やまと王将の想い</h2>
+          <div class="story-content">
+            <div class="story-text">
+              <p>皆さん、こんにちわ、やまと王将で〜す。いま人気の将棋道場です。</p>
+              <p>「ここは面白い」、「ストレス解消になる」とか言って、いろんな人が遊びに来るよ。</p>
+              <p>土日祝日は賞金付きのトーナメントも人気だよ。三段前後の有段者が多いけど、３級とか６級とかいて駒落ち道場みたいで、初段以下の優勝も出るよ。負けるかどには福来たるです。</p>
+              <p>メチャ楽しいから来てね！(^｡^)</p>
+            </div>
+            <div class="story-image">
+              <img src="/images/shogi-board.jpg" alt="将棋盤の風景" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="features">
+        <div class="container">
+          <h2>やまと王将の特徴</h2>
+          <div class="features-grid">
+            <div class="feature-card">
+              <div class="feature-icon">🏆</div>
+              <h3>賞金付きトーナメント</h3>
+              <p>土日祝日に開催される賞金付きトーナメントが人気です。様々なレベルの方が参加でき、初段以下の優勝も多数輩出しています。</p>
+            </div>
+            
+            <div class="feature-card">
+              <div class="feature-icon">🎯</div>
+              <h3>幅広い棋力に対応</h3>
+              <p>三段前後の有段者から3級、6級まで幅広い棋力の方が集まる、まさに駒落ち道場。どなたでも楽しく対局できます。</p>
+            </div>
+            
+            <div class="feature-card">
+              <div class="feature-icon">🎓</div>
+              <h3>初心者教室</h3>
+              <p>初心者のための子供教室（大人もOK）も人気です。将棋の基本から丁寧に指導いたします。</p>
+            </div>
+            
+            <div class="feature-card">
+              <div class="feature-icon">😊</div>
+              <h3>アットホームな雰囲気</h3>
+              <p>「ここは面白い」「ストレス解消になる」と評判のアットホームな雰囲気。楽しく将棋を指せる環境です。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="philosophy">
+        <div class="container">
+          <h2>将棋への想い</h2>
+          <div class="philosophy-content">
+            <blockquote>
+              <p>将棋は一生の財産。思考訓練、友達つくり、必ず役立ちます。</p>
+            </blockquote>
+            <p>やまと王将では、将棋を通じて多くの人との出会いと学びを提供しています。勝敗の結果だけでなく、考える力、相手を思いやる心、そして何より楽しさを大切にしています。</p>
+            <p>「負けるかどには福来たる」の精神で、失敗を恐れず、常に前向きに取り組む姿勢を大切にしています。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="approach">
+        <div class="container">
+          <h2>私たちの取り組み</h2>
+          <div class="approach-grid">
+            <div class="approach-item">
+              <h3>多様な学習機会</h3>
+              <p>将棋だけでなく、国語、数学、歴史など、遊びながら学べる環境を提供しています。様々な角度から知識を深めることができます。</p>
+            </div>
+            
+            <div class="approach-item">
+              <h3>体験重視</h3>
+              <p>月謝制の教室では体験入学も実施しています。まずは気軽に体験していただき、将棋の楽しさを感じていただけます。</p>
+            </div>
+            
+            <div class="approach-item">
+              <h3>継続的な成長</h3>
+              <p>毎週土曜日の定期教室で、継続的に技術向上を図ります。一人ひとりのペースに合わせた指導を心がけています。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="contact-info">
+        <div class="container">
+          <h2>お問い合わせ</h2>
+          <div class="contact-grid">
+            <div class="contact-item">
+              <h3>教室に関するお問い合わせ</h3>
+              <p><strong>電話:</strong> 046-262-2670</p>
+              <p><strong>教室開催:</strong> 毎週土曜日の午前中</p>
+              <p><strong>月謝:</strong> 4,000円（体験入学有）</p>
+            </div>
+            
+            <div class="contact-item">
+              <h3>将棋処のご利用について</h3>
+              <p><strong>電話:</strong> 090-8431-1107</p>
+              <p><strong>営業時間:</strong> 13:00～20:00</p>
+              <p><strong>営業日:</strong> 木・金・土・日・祝日</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="cta-section">
+        <div class="container">
+          <h2>一緒に将棋を楽しみませんか？</h2>
+          <p>初心者から上級者まで、どなたでも大歓迎です。まずはお気軽にお越しください。</p>
+          <div class="cta-buttons">
+            <a href="/reserve" class="cta-button">今すぐ予約</a>
+            <a href="/services" class="cta-button secondary">サービス詳細</a>
+          </div>
+        </div>
+      </section>
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style>
+  .hero {
+    background: url('/images/space.jpg') no-repeat center;
+    background-size: cover;
+    color: white;
+    text-align: center;
+    padding: 100px 20px;
+  }
+
+  .hero-subtitle {
+    font-size: 1.2rem;
+    margin-top: 20px;
+    opacity: 0.9;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+  }
+
+  .story {
+    background-color: #f9f9f9;
+  }
+
+  .story h2, .features h2, .philosophy h2, .approach h2, .contact-info h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 2.5rem;
+    color: #333;
+  }
+
+  .story-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+
+  .story-text p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    color: #555;
+  }
+
+  .story-image img {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+  }
+
+  .feature-card {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease;
+  }
+
+  .feature-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .feature-icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+  }
+
+  .feature-card h3 {
+    color: #d32f2f;
+    margin-bottom: 15px;
+    font-size: 1.4rem;
+  }
+
+  .feature-card p {
+    color: #666;
+    line-height: 1.6;
+  }
+
+  .philosophy {
+    background-color: #f5f5f5;
+  }
+
+  .philosophy-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .philosophy blockquote {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+    border-left: 5px solid #d32f2f;
+  }
+
+  .philosophy blockquote p {
+    font-size: 1.3rem;
+    color: #d32f2f;
+    font-weight: bold;
+    margin: 0;
+  }
+
+  .philosophy-content p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 20px;
+  }
+
+  .approach-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+  }
+
+  .approach-item {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .approach-item h3 {
+    color: #d32f2f;
+    margin-bottom: 15px;
+    font-size: 1.4rem;
+  }
+
+  .approach-item p {
+    color: #666;
+    line-height: 1.6;
+  }
+
+  .contact-info {
+    background-color: #f9f9f9;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+  }
+
+  .contact-item {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 2, 0, 0.1);
+  }
+
+  .contact-item h3 {
+    color: #d32f2f;
+    margin-bottom: 20px;
+    font-size: 1.4rem;
+  }
+
+  .contact-item p {
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 10px;
+  }
+
+  .cta-section {
+    background-color: #f5f5f5;
+    text-align: center;
+  }
+
+  .cta-section h2 {
+    margin-bottom: 20px;
+    font-size: 2rem;
+    color: #333;
+  }
+
+  .cta-section p {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 30px;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .cta-button {
+    background-color: #d32f2f;
+    color: white;
+    padding: 15px 30px;
+    text-decoration: none;
+    border-radius: 5px;
+    display: inline-block;
+    font-weight: bold;
+    transition: background-color 0.3s;
+  }
+
+  .cta-button:hover {
+    background-color: #b71c1c;
+  }
+
+  .cta-button.secondary {
+    background-color: #666;
+  }
+
+  .cta-button.secondary:hover {
+    background-color: #555;
+  }
+
+  /* レスポンシブ対応 */
+  @media (max-width: 768px) {
+    .story-content {
+      grid-template-columns: 1fr;
+    }
+    
+    .cta-buttons {
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .cta-button {
+      width: 200px;
+    }
+  }
+</style>

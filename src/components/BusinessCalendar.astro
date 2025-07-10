@@ -1,0 +1,358 @@
+---
+// src/components/BusinessCalendar.astro
+const currentYear = 2025;
+const currentMonth = 7; // 7月
+
+// 営業日の設定（簡単に更新できるように配列で管理）
+const businessDays = {
+  '2025-7': [3, 5, 6, 8, 12, 13, 17, 19, 20, 21, 24, 26, 27, 31],
+  '2025-8': [2, 3, 7, 8, 9, 10, 14, 15, 16, 17, 23, 24, 28, 29, 30, 31],
+  // 新しい月を追加する場合はここに追加
+};
+
+const months = [
+  '1月', '2月', '3月', '4月', '5月', '6月',
+  '7月', '8月', '9月', '10月', '11月', '12月'
+];
+
+const weekdays = ['日', '月', '火', '水', '木', '金', '土'];
+
+// カレンダー生成関数
+function generateCalendar(year, month) {
+  const monthKey = `${year}-${month}`;
+  const businessDaysForMonth = businessDays[monthKey] || [];
+  
+  // その月の1日と最終日を取得
+  const firstDay = new Date(year, month - 1, 1);
+  const lastDay = new Date(year, month, 0);
+  const daysInMonth = lastDay.getDate();
+  const startingDayOfWeek = firstDay.getDay();
+
+  // カレンダーの日付配列を生成
+  const calendarDays = [];
+
+  // 前月の末尾の日付
+  for (let i = startingDayOfWeek - 1; i >= 0; i--) {
+    const prevDate = new Date(year, month - 1, -i);
+    calendarDays.push({
+      date: prevDate.getDate(),
+      isCurrentMonth: false,
+      isBusinessDay: false
+    });
+  }
+
+  // 当月の日付
+  for (let date = 1; date <= daysInMonth; date++) {
+    const isBusinessDay = businessDaysForMonth.includes(date);
+    calendarDays.push({
+      date,
+      isCurrentMonth: true,
+      isBusinessDay
+    });
+  }
+
+  // 次月の初めの日付（42日になるまで）
+  const remainingDays = 42 - calendarDays.length;
+  for (let date = 1; date <= remainingDays; date++) {
+    calendarDays.push({
+      date,
+      isCurrentMonth: false,
+      isBusinessDay: false
+    });
+  }
+  
+  return calendarDays;
+}
+
+// 当月と翌月のカレンダーを生成
+const currentCalendar = generateCalendar(currentYear, currentMonth);
+const nextMonth = currentMonth === 12 ? 1 : currentMonth + 1;
+const nextYear = currentMonth === 12 ? currentYear + 1 : currentYear;
+const nextCalendar = generateCalendar(nextYear, nextMonth);
+---
+
+<div class="business-calendar">
+  <div class="calendar-header">
+    <h3 class="main-title">営業日カレンダー ○が営業日</h3>
+  </div>
+  
+  <div class="calendars-container">
+    <!-- 当月のカレンダー -->
+    <div class="calendar-month">
+      <h4 class="month-year">
+        '{currentYear % 100}.{months[currentMonth - 1]}度
+      </h4>
+      
+      <div class="calendar-grid">
+        {weekdays.map((day, index) => (
+          <div class={`weekday ${index === 0 ? 'sunday' : index === 6 ? 'saturday' : ''}`}>
+            {day}
+          </div>
+        ))}
+        
+        {currentCalendar.map((day, index) => (
+          <div class={`calendar-day ${!day.isCurrentMonth ? 'other-month' : ''} ${day.isBusinessDay ? 'business-day' : ''}`}>
+            <span class="date-number">{day.date}</span>
+            {day.isBusinessDay && <div class="business-circle"></div>}
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- 翌月のカレンダー -->
+    <div class="calendar-month">
+      <h4 class="month-year">
+        '{nextYear % 100}.{months[nextMonth - 1]}度
+      </h4>
+      
+      <div class="calendar-grid">
+        {weekdays.map((day, index) => (
+          <div class={`weekday ${index === 0 ? 'sunday' : index === 6 ? 'saturday' : ''}`}>
+            {day}
+          </div>
+        ))}
+        
+        {nextCalendar.map((day, index) => (
+          <div class={`calendar-day ${!day.isCurrentMonth ? 'other-month' : ''} ${day.isBusinessDay ? 'business-day' : ''}`}>
+            <span class="date-number">{day.date}</span>
+            {day.isBusinessDay && <div class="business-circle"></div>}
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+  
+  <div class="calendar-info">
+    <p><strong>営業時間:</strong> 12:00～19:00</p>
+    <p><strong>基本営業日:</strong> 木・金・土・日・祝日</p>
+    <p class="note">※臨時休業がある場合は上記カレンダーをご確認ください</p>
+  </div>
+</div>
+
+<style>
+  .business-calendar {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+  }
+
+  .calendar-header {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .main-title {
+    font-size: 1.8rem;
+    color: #333;
+    margin: 0;
+    font-weight: bold;
+  }
+
+  .calendars-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 30px;
+  }
+
+  .calendar-month {
+    background: #f9f9f9;
+    border-radius: 10px;
+    padding: 15px;
+  }
+
+  .month-year {
+    font-size: 1.3rem;
+    color: #333;
+    margin: 0 0 15px 0;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+    background: #e0e0e0;
+    padding: 8px;
+    border-radius: 8px;
+  }
+
+  .weekday {
+    background: #333;
+    color: white;
+    padding: 8px 4px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 0.8rem;
+  }
+
+  .weekday.sunday {
+    background: #d32f2f;
+    color: white;
+  }
+
+  .weekday.saturday {
+    background: #1976d2;
+    color: white;
+  }
+
+  .calendar-day {
+    background: white;
+    padding: 12px 6px;
+    text-align: center;
+    position: relative;
+    min-height: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .calendar-day.other-month {
+    background: #f5f5f5;
+    color: #ccc;
+  }
+
+  .date-number {
+    font-size: 0.95rem;
+    font-weight: bold;
+    position: relative;
+    z-index: 2;
+  }
+
+  .business-circle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 28px;
+    height: 28px;
+    border: 2px solid #333;
+    border-radius: 50%;
+    background: transparent;
+    z-index: 1;
+  }
+
+  .calendar-day.business-day {
+    position: relative;
+  }
+
+  .calendar-info {
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    text-align: center;
+  }
+
+  .calendar-info p {
+    margin: 8px 0;
+    color: #555;
+  }
+
+  .calendar-info .note {
+    font-size: 0.9rem;
+    color: #666;
+    font-style: italic;
+  }
+
+  /* レスポンシブ対応 */
+  @media (max-width: 768px) {
+    .business-calendar {
+      padding: 15px;
+    }
+
+    .main-title {
+      font-size: 1.5rem;
+    }
+
+    .calendars-container {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .calendar-month {
+      padding: 12px;
+    }
+
+    .month-year {
+      font-size: 1.2rem;
+      margin-bottom: 12px;
+    }
+
+    .calendar-grid {
+      padding: 6px;
+    }
+
+    .weekday {
+      padding: 6px 3px;
+      font-size: 0.7rem;
+    }
+
+    .calendar-day {
+      padding: 8px 3px;
+      min-height: 35px;
+    }
+
+    .date-number {
+      font-size: 0.85rem;
+    }
+
+    .business-circle {
+      width: 24px;
+      height: 24px;
+      border: 2px solid #333;
+    }
+
+    .calendar-info {
+      padding: 15px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .business-calendar {
+      padding: 10px;
+    }
+
+    .main-title {
+      font-size: 1.3rem;
+    }
+
+    .calendars-container {
+      gap: 15px;
+    }
+
+    .calendar-month {
+      padding: 10px;
+    }
+
+    .month-year {
+      font-size: 1.1rem;
+    }
+
+    .calendar-day {
+      padding: 6px 2px;
+      min-height: 30px;
+    }
+
+    .date-number {
+      font-size: 0.8rem;
+    }
+
+    .business-circle {
+      width: 20px;
+      height: 20px;
+    }
+
+    .calendar-info {
+      padding: 12px;
+    }
+
+    .calendar-info p {
+      font-size: 0.9rem;
+    }
+  }
+</style>

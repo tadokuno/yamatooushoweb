@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import BusinessCalendar from '../components/BusinessCalendar.astro'; 
 import '../styles/global.css';
 ---
 
@@ -23,60 +24,50 @@ import '../styles/global.css';
         <p>初心者から上級者まで、将棋を愛するすべての人に開かれた将棋処です。気軽に対局を楽しんだり、トーナメントで力試しを楽しむこともできます。</p>
       </section>
       <section class="x-link">
-        <h2>最新情報はXでチェック！</h2>
-        <p>将棋処 やまと王将の最新イベントやキャンペーンはXで発信中！</p>
-        <p>フォローして最新情報をゲット！</p>
+        <h2>最新情報はXでチェック!</h2>
+        <p>将棋処 やまと王将の最新イベントやキャンペーンはXで発信中!</p>
+        <p>フォローして最新情報をゲット!</p>
         <a href="https://x.com/yamatoousho" class="cta-button x-button">
           <img src="/images/x-logo.png" alt="Xロゴ" width="24" height="24" />
           @yamatoousho をフォロー
         </a>
       </section>
-      <section class="events">
-        <h2>最新イベント</h2>
-        <p>6月28日: 定例トーナメント開催！</p>
-        <a href="/events" class="cta-button">詳細を見る</a>
-      </section>
       <section class="access">
         <h2>アクセス</h2>
         <div class="access-info">
           <h2>将棋処 やまと王将</h2>
-          <p><strong>住所:</strong> 〒242-0018 神奈川県大和市深見西２丁目-１-２ ホソノビル 2F</p>
+          <p><strong>住所:</strong> 〒242-0018 神奈川県大和市深見西2丁目-1-2 ホソノビル 2F</p>
           <p><strong>営業日:</strong> 木・金・土・日および祝日</p>
-          <p><strong>営業時間:</strong> 13:00～20:00</p>
+          <p><strong>営業時間:</strong> 12:00~19:00</p>
           <p><strong>電話:</strong> 090-8431-1107</p>
           <p><strong>最寄り駅:</strong> 小田急線・相鉄線 大和駅 徒歩7分</p>
         </div>
         <div class="map-container">
           <h2>Googleマップ</h2>
-          <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6498.371040752466!2d139.45959901115296!3d35.474953441164075!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x601856147134272d%3A0x3db2494a376bb0fc!2z44KE44G-44Go546L5bCG!5e0!3m2!1sja!2sjp!4v1750846715752!5m2!1sja!2sjp"
-            width="600"
-            height="600" 
-            style="border:0;" 
-            allowfullscreen="" 
-            loading="lazy" 
-            referrerpolicy="no-referrer-when-downgrade"
-          ></iframe>
+          <div class="iframe-container">
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6498.371040752466!2d139.45959901115296!3d35.474953441164075!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x601856147134272d%3A0x3db2494a376bb0fc!2z44KE44G-44Go546L5bCG!5e0!3m2!1sja!2sjp!4v1750846715752!5m2!1sja!2sjp"
+              width="600"
+              height="600" 
+              style="border:0;" 
+              allowfullscreen="" 
+              loading="lazy" 
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
         </div>
         <div class="simple-map">
           <h2>簡単な地図</h2>
-          <img src="/images/simple-map.png" alt="やまと王将への地図" width="600" height="400" />
+          <div class="image-container">
+            <img src="/images/simple-map.png" alt="やまと王将への地図" />
+          </div>
         </div>
       </section>
       <section class="calendar">
-      <h2>営業日カレンダー</h2>
-      <p>やまと王将 将棋処の営業日をチェック！月曜定休、13:00～23:00（臨時休業はカレンダーで確認）。</p>
-      <iframe 
-        src="https://calendar.google.com/calendar/embed?src=yamatoousho%40gmail.com&ctz=Asia%2FTokyo" 
-        width="600"
-        height="450"
-        style="border:0;"
-        allowfullscreen=""
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-      ></iframe>
-      <p><a href="/reserve" class="cta-button">今すぐ予約</a></p>
-    </section>
+        <h2>営業日カレンダー</h2>
+        <p>やまと王将 将棋処の営業日をチェック！</p>
+        <BusinessCalendar />
+      </section>
     </main>
     <Footer />
   </body>
@@ -90,31 +81,227 @@ import '../styles/global.css';
     text-align: center;
     padding: 100px 20px;
   }
-.cta-button {
+  
+  .hero h1 {
+    font-size: 2.5rem;
+    margin: 0;
+  }
+  
+  .cta-button {
     background-color: #d32f2f;
     color: white;
     padding: 10px 20px;
     text-decoration: none;
     border-radius: 5px;
     display: inline-block;
+    transition: background-color 0.3s ease;
   }
-  .intro, .events, .x-link {
+  
+  .cta-button:hover {
+    background-color: #b71c1c;
+  }
+  
+  .intro, .events, .x-link, .access, .calendar {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 40px 20px;
   }
+  
+  .intro h2, .events h2, .x-link h2, .access h2, .calendar h2 {
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 2rem;
+  }
+  
+  .intro p, .events p, .x-link p, .access p, .calendar p {
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 15px;
+  }
+  
   .x-link {
     text-align: center;
     background: #f9f9f9;
     border-radius: 8px;
     padding: 30px;
   }
+  
   .x-button {
-    display: flex;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     gap: 8px;
-    background-color: #000; /* Xのブランドカラー（黒） */
+    background-color: #000;
+    padding: 12px 24px;
   }
+  
   .x-button img {
     vertical-align: middle;
+  }
+  
+  .events {
+    text-align: center;
+    background-color: #f5f5f5;
+  }
+  
+  .access-info {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
+  }
+  
+  .access-info h2 {
+    color: #d32f2f;
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+  }
+  
+  .access-info p {
+    margin-bottom: 10px;
+  }
+  
+  .map-container, .simple-map {
+    margin-bottom: 40px;
+  }
+  
+  .map-container h2, .simple-map h2 {
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .iframe-container {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .iframe-container iframe {
+    width: 100%;
+    height: auto;
+    min-height: 400px;
+  }
+  
+  .image-container {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .image-container img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .calendar {
+    text-align: center;
+    background-color: #f9f9f9;
+  }
+
+  /* レスポンシブ対応 */
+  @media (max-width: 768px) {
+    .hero {
+      padding: 60px 20px;
+    }
+    
+    .hero h1 {
+      font-size: 2rem;
+    }
+    
+    .intro, .events, .x-link, .access, .calendar {
+      padding: 30px 15px;
+    }
+    
+    .intro h2, .events h2, .x-link h2, .access h2, .calendar h2 {
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+    }
+    
+    .intro p, .events p, .x-link p, .access p, .calendar p {
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+    
+    .x-link {
+      padding: 25px 15px;
+    }
+    
+    .x-button {
+      padding: 12px 20px;
+      font-size: 0.9rem;
+    }
+    
+    .access-info {
+      padding: 25px 20px;
+    }
+    
+    .access-info h2 {
+      font-size: 1.6rem;
+    }
+    
+    .cta-button {
+      padding: 12px 20px;
+      font-size: 1rem;
+    }
+    
+    .iframe-container iframe {
+      min-height: 300px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .hero {
+      padding: 50px 15px;
+    }
+    
+    .hero h1 {
+      font-size: 1.8rem;
+    }
+    
+    .intro, .events, .x-link, .access, .calendar {
+      padding: 25px 10px;
+    }
+    
+    .intro h2, .events h2, .x-link h2, .access h2, .calendar h2 {
+      font-size: 1.6rem;
+    }
+    
+    .x-link {
+      padding: 20px 10px;
+    }
+    
+    .x-button {
+      padding: 10px 15px;
+      font-size: 0.85rem;
+      flex-direction: column;
+      gap: 5px;
+    }
+    
+    .access-info {
+      padding: 20px 15px;
+    }
+    
+    .access-info h2 {
+      font-size: 1.5rem;
+    }
+    
+    .access-info p {
+      font-size: 0.9rem;
+    }
+    
+    .cta-button {
+      padding: 10px 15px;
+      font-size: 0.9rem;
+    }
+    
+    .iframe-container iframe {
+      min-height: 250px;
+    }
   }
 </style>

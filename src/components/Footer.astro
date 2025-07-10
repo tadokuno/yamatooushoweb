@@ -1,20 +1,214 @@
 <footer>
-  <p>将棋処 やまと王将 | 神奈川県大和市深見西２丁目-１-２ ホソノビル 2F </p>
-  <p> | 営業時間: 13:00～20:00 | ☎ 090-8431-1107 | yamatoousho@gmail.com </p>
-  <p>
-    <a href="https://x.com/yamatoousho">X</a> |
-    <a href="https://instagram.com/yamatoousho">Instagram</a>
-  </p>
+  <div class="footer-container">
+    <div class="footer-info">
+      <h3>将棋処 やまと王将</h3>
+      <div class="footer-details">
+        <p class="address">〒242-0018 神奈川県大和市深見西２丁目-１-２ ホソノビル 2F</p>
+        <p class="hours">営業時間: 12:00～19:00</p>
+        <p class="contact">
+          <span class="phone">☎ 090-8431-1107</span>
+          <span class="email">yamatoousho@gmail.com</span>
+        </p>
+      </div>
+    </div>
+    
+    <div class="footer-social">
+      <h4>フォローしてください</h4>
+      <div class="social-links">
+        <a href="https://x.com/yamatoousho" target="_blank" rel="noopener noreferrer">
+          <span class="social-icon">𝕏</span>
+          <span>Twitter/X</span>
+        </a>
+        <a href="https://instagram.com/yamatoousho" target="_blank" rel="noopener noreferrer">
+          <span class="social-icon">📷</span>
+          <span>Instagram</span>
+        </a>
+      </div>
+    </div>
+  </div>
+  
+  <div class="footer-bottom">
+    <p>&copy; 2025 やまと王将. All rights reserved.</p>
+  </div>
 </footer>
 
 <style>
-  a {
-    color: aqua;
-  }
   footer {
     background-color: #333;
     color: white;
+    padding: 40px 0 20px;
+  }
+  
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 40px;
+    align-items: start;
+  }
+  
+  .footer-info h3 {
+    color: #d32f2f;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+  }
+  
+  .footer-details p {
+    margin-bottom: 10px;
+    line-height: 1.6;
+  }
+  
+  .address {
+    font-size: 0.95rem;
+  }
+  
+  .hours {
+    font-weight: bold;
+    color: #f0f0f0;
+  }
+  
+  .contact {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  .phone, .email {
+    font-size: 0.95rem;
+  }
+  
+  .email {
+    color: #87CEEB;
+  }
+  
+  .footer-social h4 {
+    margin-bottom: 15px;
+    color: #f0f0f0;
+  }
+  
+  .social-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .social-links a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #87CEEB;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+  }
+  
+  .social-links a:hover {
+    background-color: rgba(135, 206, 235, 0.1);
+    color: white;
+  }
+  
+  .social-icon {
+    font-size: 1.2rem;
+    width: 24px;
     text-align: center;
-    padding: 10px;
+  }
+  
+  .footer-bottom {
+    border-top: 1px solid #555;
+    margin-top: 30px;
+    padding-top: 20px;
+    text-align: center;
+    color: #ccc;
+    font-size: 0.9rem;
+  }
+
+  /* レスポンシブ対応 */
+  @media (max-width: 768px) {
+    footer {
+      padding: 30px 0 15px;
+    }
+    
+    .footer-container {
+      grid-template-columns: 1fr;
+      gap: 30px;
+      padding: 0 15px;
+    }
+    
+    .footer-info h3 {
+      font-size: 1.3rem;
+      margin-bottom: 15px;
+    }
+    
+    .footer-details p {
+      font-size: 0.9rem;
+    }
+    
+    .contact {
+      flex-direction: column;
+    }
+    
+    .social-links {
+      flex-direction: row;
+      justify-content: center;
+      gap: 15px;
+    }
+    
+    .social-links a {
+      flex-direction: column;
+      padding: 10px 15px;
+      text-align: center;
+      min-width: 80px;
+    }
+    
+    .footer-bottom {
+      margin-top: 20px;
+      padding-top: 15px;
+      font-size: 0.85rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    footer {
+      padding: 25px 0 10px;
+    }
+    
+    .footer-container {
+      padding: 0 10px;
+      gap: 25px;
+    }
+    
+    .footer-info h3 {
+      font-size: 1.2rem;
+    }
+    
+    .footer-details p {
+      font-size: 0.85rem;
+      margin-bottom: 8px;
+    }
+    
+    .address {
+      font-size: 0.8rem;
+    }
+    
+    .social-links {
+      gap: 10px;
+    }
+    
+    .social-links a {
+      padding: 8px 10px;
+      min-width: 70px;
+      font-size: 0.85rem;
+    }
+    
+    .social-icon {
+      font-size: 1rem;
+    }
+    
+    .footer-bottom {
+      font-size: 0.8rem;
+    }
   }
 </style>

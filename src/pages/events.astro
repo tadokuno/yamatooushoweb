@@ -1,4 +1,5 @@
 ---
+import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
@@ -13,40 +14,103 @@ const pastEvents = sortedEvents.filter(event => event.status === 'past');
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>イベント - やまと王将 将棋処</title>
+    <Layout />
     <meta name="description" content="やまと王将 将棋処のイベント情報。最新イベントや過去の対局会をチェック。" />
+    <title>イベント | やまと王将</title>
   </head>
   <body>
     <Header />
     <main>
-      <section class="events">
-        <h1>イベント</h1>
-        <div class="upcoming-events">
+      <section class="hero">
+        <h1>イベント情報</h1>
+        <p class="hero-subtitle">定期トーナメントから特別イベントまで</p>
+      </section>
+      
+      <section class="upcoming-events">
+        <div class="container">
           <h2>近日中のイベント</h2>
           {upcomingEvents.length > 0 ? (
-            upcomingEvents.map(event => (
-              <article class="event-card">
-                <img src={event.image} alt={event.title} width="800" height="400" />
-                <h3>{event.title}</h3>
-                <p><strong>日時:</strong> {event.date} {event.time}</p>
-                <p>{event.description}</p>
-                <a href="/reserve" class="cta-button">参加予約</a>
-              </article>
-            ))
+            <div class="events-grid">
+              {upcomingEvents.map(event => (
+                <article class="event-card upcoming">
+                  <div class="event-image">
+                    <img src={event.image} alt={event.title} />
+                    <div class="event-status">開催予定</div>
+                  </div>
+                  <div class="event-content">
+                    <h3>{event.title}</h3>
+                    <div class="event-datetime">
+                      <p><strong>日時:</strong> {event.date} {event.time}</p>
+                    </div>
+                    <p class="event-description">{event.description}</p>
+                    <div class="event-actions">
+                      <a href="/reserve" class="cta-button">参加予約</a>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
           ) : (
-            <p>近日中のイベントは予定されていません。</p>
+            <div class="no-events">
+              <p>現在、近日中のイベントは予定されていません。</p>
+              <p>最新情報はXでチェックしてください！</p>
+              <a href="https://x.com/yamatoousho" class="cta-button secondary">Xをフォロー</a>
+            </div>
           )}
         </div>
-        <div class="past-events">
+      </section>
+
+      <section class="past-events">
+        <div class="container">
           <h2>過去のイベント</h2>
-          {pastEvents.map(event => (
-            <article class="event-card">
-              <img src={event.image} alt={event.title} width="800" height="400" />
-              <h3>{event.title}</h3>
-              <p><strong>日時:</strong> {event.date} {event.time}</p>
-              <p>{event.description}</p>
-            </article>
-          ))}
+          <div class="events-grid">
+            {pastEvents.map(event => (
+              <article class="event-card past">
+                <div class="event-image">
+                  <img src={event.image} alt={event.title} />
+                  <div class="event-status past">開催済み</div>
+                </div>
+                <div class="event-content">
+                  <h3>{event.title}</h3>
+                  <div class="event-datetime">
+                    <p><strong>日時:</strong> {event.date} {event.time}</p>
+                  </div>
+                  <p class="event-description">{event.description}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section class="event-info">
+        <div class="container">
+          <h2>イベント参加について</h2>
+          <div class="info-grid">
+            <div class="info-card">
+              <h3>定例トーナメント</h3>
+              <p>土日祝日に開催される賞金付きトーナメント。初段以下の優勝も多数輩出！どなたでもお気軽にご参加ください。</p>
+            </div>
+            <div class="info-card">
+              <h3>参加方法</h3>
+              <p>事前予約または当日受付。詳細はお電話またはXでお気軽にお問い合わせください。</p>
+            </div>
+            <div class="info-card">
+              <h3>お問い合わせ</h3>
+              <p><strong>電話:</strong> 090-8431-1107<br><strong>X:</strong> @yamatoousho</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="cta-section">
+        <div class="container">
+          <h2>イベントに参加してみませんか？</h2>
+          <p>初心者から上級者まで、どなたでも楽しめるイベントを開催しています。</p>
+          <div class="cta-buttons">
+            <a href="/reserve" class="cta-button">今すぐ予約</a>
+            <a href="/about" class="cta-button secondary">やまと王将について</a>
+          </div>
         </div>
       </section>
     </main>
@@ -55,33 +119,323 @@ const pastEvents = sortedEvents.filter(event => event.status === 'past');
 </html>
 
 <style>
-  .events {
+  .hero {
+    background: url('/images/space.jpg') no-repeat center;
+    background-size: cover;
+    color: white;
+    text-align: center;
+    padding: 100px 20px;
+  }
+
+  .hero-subtitle {
+    font-size: 1.2rem;
+    margin-top: 20px;
+    opacity: 0.9;
+  }
+
+  .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 40px 20px;
   }
-  .upcoming-events, .past-events {
-    margin: 20px 0;
+
+  .upcoming-events {
+    background-color: #f9f9f9;
   }
+
+  .upcoming-events h2, .past-events h2, .event-info h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 2.5rem;
+    color: #333;
+  }
+
+  .events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+  }
+
   .event-card {
     background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .event-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+  }
+
+  .event-card.upcoming {
+    border-top: 4px solid #d32f2f;
+  }
+
+  .event-card.past {
+    border-top: 4px solid #666;
+  }
+
+  .event-image {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .event-image img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .event-card:hover .event-image img {
+    transform: scale(1.05);
+  }
+
+  .event-status {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #d32f2f;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+  }
+
+  .event-status.past {
+    background: #666;
+  }
+
+  .event-content {
+    padding: 25px;
+  }
+
+  .event-content h3 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 1.4rem;
+  }
+
+  .event-datetime {
+    margin-bottom: 15px;
+    padding: 10px 15px;
+    background: #f5f5f5;
+    border-radius: 6px;
+    border-left: 4px solid #d32f2f;
+  }
+
+  .event-datetime p {
+    margin: 0;
+    color: #555;
+  }
+
+  .event-description {
+    color: #666;
+    line-height: 1.6;
     margin-bottom: 20px;
-    padding: 20px;
   }
-  .event-card img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
-    margin-bottom: 10px;
+
+  .event-actions {
+    text-align: center;
   }
+
+  .no-events {
+    text-align: center;
+    padding: 60px 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .no-events p {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 15px;
+  }
+
+  .event-info {
+    background-color: #f5f5f5;
+  }
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+  }
+
+  .info-card {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .info-card h3 {
+    color: #d32f2f;
+    margin-bottom: 15px;
+    font-size: 1.4rem;
+  }
+
+  .info-card p {
+    color: #666;
+    line-height: 1.6;
+  }
+
+  .cta-section {
+    background-color: #f9f9f9;
+    text-align: center;
+  }
+
+  .cta-section h2 {
+    margin-bottom: 20px;
+    font-size: 2rem;
+    color: #333;
+  }
+
+  .cta-section p {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 30px;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
   .cta-button {
     background-color: #d32f2f;
     color: white;
-    padding: 10px 20px;
+    padding: 15px 30px;
     text-decoration: none;
     border-radius: 5px;
     display: inline-block;
+    font-weight: bold;
+    transition: background-color 0.3s;
+  }
+
+  .cta-button:hover {
+    background-color: #b71c1c;
+  }
+
+  .cta-button.secondary {
+    background-color: #666;
+  }
+
+  .cta-button.secondary:hover {
+    background-color: #555;
+  }
+
+  /* レスポンシブ対応 */
+  @media (max-width: 768px) {
+    .hero {
+      padding: 60px 20px;
+    }
+    
+    .hero h1 {
+      font-size: 2rem;
+    }
+    
+    .hero-subtitle {
+      font-size: 1rem;
+    }
+    
+    .container {
+      padding: 30px 15px;
+    }
+    
+    .upcoming-events h2, .past-events h2, .event-info h2 {
+      font-size: 2rem;
+      margin-bottom: 30px;
+    }
+    
+    .events-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    
+    .event-content {
+      padding: 20px;
+    }
+    
+    .event-content h3 {
+      font-size: 1.3rem;
+    }
+    
+    .no-events {
+      padding: 40px 15px;
+    }
+    
+    .info-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    
+    .info-card {
+      padding: 25px 20px;
+    }
+    
+    .cta-section h2 {
+      font-size: 1.8rem;
+    }
+    
+    .cta-buttons {
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    .cta-button {
+      width: 250px;
+      padding: 12px 20px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .hero {
+      padding: 50px 15px;
+    }
+    
+    .hero h1 {
+      font-size: 1.8rem;
+    }
+    
+    .container {
+      padding: 25px 10px;
+    }
+    
+    .upcoming-events h2, .past-events h2, .event-info h2 {
+      font-size: 1.8rem;
+    }
+    
+    .event-content {
+      padding: 15px;
+    }
+    
+    .event-image img {
+      height: 200px;
+    }
+    
+    .event-status {
+      top: 10px;
+      right: 10px;
+      padding: 4px 8px;
+      font-size: 0.7rem;
+    }
+    
+    .info-card {
+      padding: 20px 15px;
+    }
+    
+    .cta-button {
+      width: 200px;
+      padding: 12px 15px;
+      font-size: 0.9rem;
+    }
   }
 </style>
