@@ -1,0 +1,230 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+---
+
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <Layout />
+    <title>王将規約 | やまと王将</title>
+    <meta name="description" content="やまと王将の規約とルールについて。運営方針、対局ルール、手合いについてご案内します。" />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <section class="section section-gray">
+        <div class="container">
+          <div class="card rules-header">
+            <h1>やまと王将規約</h1>
+            <p class="revision-date">＜平成２３年４月改訂＞</p>
+          </div>
+
+          <div class="card rule-section">
+            <h2>１　運営方針</h2>
+            <div class="rule-content">
+              <p>当道場の最大の目的は、<strong class="highlight">楽しく将棋を指す</strong>ことです。</p>
+              <p>和気あいあいと、冗談の飛交う楽しい道場です。</p>
+              <p>知らない人も、いつのまにか気軽な仲間になっている、</p>
+              <p>すばらしいことです。しかし次のことには留意してください。</p>
+              
+              <div class="info-box warning">
+                <ul class="rule-list">
+                  <li>おしゃべりは、ほどほどにお願いします。</li>
+                  <li>お互いに相手に対し、寛容の気持ちで接しましょう。</li>
+                  <li>喧嘩は厳禁です。暴力は即、退場といたします。</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="card rule-section">
+            <h2>２　やまと王将公式戦対局規定</h2>
+            <div class="rule-content">
+              <p>日本将棋連盟ルールと異なる点は次のとおりです。</p>
+              
+              <div class="info-box primary">
+                <h3>持将棋</h3>
+                <p>双方に詰みがなければ、大駒の多いほうが勝ちです。駒落ち戦の場合は、落とした駒は上手の持ち駒にカウントします。</p>
+                <p>大駒が同数なら、大駒５点、小駒１点としてカウントし、点数の多い方が勝ちです。</p>
+                <p>同点の場合は、後手の勝ちです。</p>
+              </div>
+              
+              <div class="info-box primary">
+                <h3>千日手</h3>
+                <p>同一局面が４回現われると「千日手」となり、指し直しとなります。</p>
+                <p>対局時計を止めて、持ち時間はそこから始めます。</p>
+                <p>振駒の場合は、先後逆にして始めます。</p>
+              </div>
+              <div class="info-box primary">
+                <h3>反則について</h3>
+                <p>二手指し、二歩、待った、は即反則負けです。</p>
+                <p>駒から指を離した時点で、指し手は決定とします。</p>
+              </div>
+              <div class="info-box primary">
+                <h3>対局時計について</h3>
+                <p>トーナメント戦では必ず対局時計を使用します。対局時計の一は後手（上手）が決める権利があります。</p>
+                <p>対局時計は、着手した方と同じ手で押す決まりです。</p>
+                <p>対局時計は、着手してから押します。</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card rule-section">
+            <h2>３　やまと王将手合い</h2>
+            <p class="subsection-note">①を基本として調整</p>
+            
+            <div class="table-container">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>段級位差</th>
+                    <th>手合い</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>同一段（級）</td>
+                    <td>平手振駒</td>
+                  </tr>
+                  <tr>
+                    <td>１段（級）差</td>
+                    <td>下位者先手</td>
+                  </tr>
+                  <tr>
+                    <td>２段（級）差</td>
+                    <td>香落ち</td>
+                  </tr>
+                  <tr>
+                    <td>３段（級）差</td>
+                    <td>角落ち</td>
+                  </tr>
+                  <tr>
+                    <td>上記以上</td>
+                    <td>飛車落ち</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="info-box warning">
+              <p>手合いは総合的な状況で席主が調整します。</p>
+              <p>早指し戦の場合は上手ハンディの特別手合いと致します。</p>
+              <p>その他、もめごとは席主の指示に従ってください。</p>
+              <p>以上、いつまでも楽しい道場が続きますよう、</p>
+              <p>皆様のご協力をお願い致します。</p>
+            </div>
+
+            <div class="signature">
+              <h3>やまと王将</h3>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style>
+  /* ページ固有のスタイルのみ */
+  .rules-header h1 {
+    font-size: 2.5rem;
+    color: #d32f2f;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+
+  .revision-date {
+    font-size: 1.2rem;
+    color: #666;
+    font-weight: bold;
+  }
+
+  .rule-section h2 {
+    font-size: 1.8rem;
+    color: #d32f2f;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #d32f2f;
+    text-decoration: underline;
+  }
+
+  .rule-content p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #333;
+    margin-bottom: 15px;
+  }
+
+  .highlight {
+    color: #d32f2f;
+    font-weight: bold;
+    font-size: 1.2em;
+  }
+
+  .rule-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .rule-list li {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #333;
+    margin-bottom: 10px;
+    padding: 5px 0;
+  }
+
+  .subsection-note {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 20px;
+    font-style: italic;
+  }
+
+  .signature {
+    margin-top: 40px;
+    padding: 20px;
+  }
+
+  .signature h3 {
+    font-size: 2rem;
+    color: #d32f2f;
+    font-weight: bold;
+  }
+
+  /* レスポンシブ対応 */
+  @media (max-width: 768px) {
+    .rules-header h1 {
+      font-size: 2rem;
+    }
+
+    .rule-section h2 {
+      font-size: 1.5rem;
+    }
+
+    .rule-content p,
+    .rule-list li {
+      font-size: 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .rules-header h1 {
+      font-size: 1.8rem;
+    }
+
+    .revision-date {
+      font-size: 1rem;
+    }
+
+    .rule-section h2 {
+      font-size: 1.3rem;
+    }
+  }
+</style>

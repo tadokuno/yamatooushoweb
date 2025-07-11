@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import ContactForm from '../components/ContactForm.astro';
 import '../styles/global.css';
 ---
 
@@ -20,11 +21,11 @@ import '../styles/global.css';
         <h1>サービス・料金のご案内</h1>
       </section>
       
-      <section class="pricing">
+      <section class="section section-gray">
         <div class="container">
           <h2>料金体系</h2>
-          <div class="pricing-grid">
-            <div class="pricing-card">
+          <div class="grid-2">
+            <div class="pricing-card card">
               <h3>席料</h3>
               <div class="price-item">
                 <span class="price-label">土日祝日</span>
@@ -40,7 +41,7 @@ import '../styles/global.css';
               </div>
             </div>
             
-            <div class="pricing-card highlight">
+            <div class="pricing-card card highlight">
               <h3>月極料金</h3>
               <div class="price-item">
                 <span class="price-label">1ヶ月間使い放題</span>
@@ -52,34 +53,34 @@ import '../styles/global.css';
         </div>
       </section>
 
-      <section class="services">
+      <section class="section">
         <div class="container">
           <h2>サービス内容</h2>
-          <div class="services-grid">
-            <div class="service-card">
-              <h3>通常対局</h3>
+          <div class="grid-3">
+            <div class="card">
+              <h3>一般対局</h3>
               <p>初心者から上級者まで、幅広いレベルの方との対局をお楽しみいただけます。静かで集中できる環境で、じっくりと将棋を指すことができます。</p>
-              <ul>
+              <ul class="check-list">
                 <li>自由対局</li>
                 <li>棋力に応じたマッチング</li>
                 <li>観戦も自由</li>
               </ul>
             </div>
             
-            <div class="service-card">
+            <div class="card">
               <h3>トーナメント</h3>
               <p>土日にトーナメントを開催しています。実力試しや他の愛好家との交流の場としてご活用ください。</p>
-              <ul>
+              <ul class="check-list">
                 <li>定例トーナメント開催</li>
                 <li>レベル別クラス分け</li>
                 <li>賞品・認定状授与</li>
               </ul>
             </div>
             
-            <div class="service-card">
+            <div class="card">
               <h3>初心者教室</h3>
               <p>将棋を始めたい方、基本から学び直したい方のための教室です。丁寧な指導で楽しく将棋を覚えることができます。</p>
-              <ul>
+              <ul class="check-list">
                 <li>駒の動かし方から指導</li>
                 <li>基本戦法の習得</li>
                 <li>実戦練習</li>
@@ -89,60 +90,26 @@ import '../styles/global.css';
         </div>
       </section>
 
-      <section class="cta-section">
+      <section class="section section-light">
         <div class="container">
           <h2>お気軽にお越しください</h2>
           <p>将棋を愛するすべての方に開かれた空間です。初心者の方も大歓迎！</p>
           <div class="cta-buttons">
-            <a href="/reserve" class="cta-button">今すぐ予約</a>
+            <button class="cta-button" onclick="openContactModal()">お問い合わせ</button>
             <a href="/access" class="cta-button secondary">アクセス情報</a>
           </div>
         </div>
       </section>
     </main>
+    <ContactForm />
     <Footer />
   </body>
 </html>
 
 <style>
-  .hero {
-    background: url('/images/space.jpg') no-repeat center;
-    background-size: cover;
-    color: white;
-    text-align: center;
-    padding: 100px 20px;
-  }
-
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 40px 20px;
-  }
-
-  .pricing {
-    background-color: #f9f9f9;
-  }
-
-  .pricing h2, .services h2 {
-    text-align: center;
-    margin-bottom: 40px;
-    font-size: 2.5rem;
-    color: #333;
-  }
-
-  .pricing-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    margin-top: 40px;
-  }
-
+  /* ページ固有のスタイルのみ */
   .pricing-card {
-    background: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    text-align: center;
+    position: relative;
   }
 
   .pricing-card.highlight {
@@ -156,29 +123,6 @@ import '../styles/global.css';
     font-size: 1.8rem;
   }
 
-  .price-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 0;
-    border-bottom: 1px solid #eee;
-  }
-
-  .price-item:last-child {
-    border-bottom: none;
-  }
-
-  .price-label {
-    font-size: 1.1rem;
-    color: #666;
-  }
-
-  .price {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #d32f2f;
-  }
-
   .price-note {
     margin-top: 15px;
     font-size: 0.9rem;
@@ -186,120 +130,10 @@ import '../styles/global.css';
     font-style: italic;
   }
 
-  .services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 30px;
-    margin-top: 40px;
-  }
-
-  .service-card {
-    background: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-
-  .service-card h3 {
-    color: #d32f2f;
-    margin-bottom: 15px;
-    font-size: 1.6rem;
-  }
-
-  .service-card p {
-    color: #666;
-    line-height: 1.6;
-    margin-bottom: 20px;
-  }
-
-  .service-card ul {
-    list-style: none;
-    padding: 0;
-  }
-
-  .service-card li {
-    padding: 8px 0;
-    color: #555;
-    position: relative;
-    padding-left: 20px;
-  }
-
-  .service-card li:before {
-    content: "✓";
-    position: absolute;
-    left: 0;
-    color: #d32f2f;
-    font-weight: bold;
-  }
-
-  .cta-section {
-    background-color: #f5f5f5;
-    text-align: center;
-  }
-
-  .cta-section h2 {
-    margin-bottom: 20px;
-    font-size: 2rem;
-    color: #333;
-  }
-
-  .cta-section p {
-    font-size: 1.1rem;
-    color: #666;
-    margin-bottom: 30px;
-  }
-
-  .cta-buttons {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-
-  .cta-button {
-    background-color: #d32f2f;
-    color: white;
-    padding: 15px 30px;
-    text-decoration: none;
-    border-radius: 5px;
-    display: inline-block;
-    font-weight: bold;
-    transition: background-color 0.3s;
-  }
-
-  .cta-button:hover {
-    background-color: #b71c1c;
-  }
-
-  .cta-button.secondary {
-    background-color: #666;
-  }
-
-  .cta-button.secondary:hover {
-    background-color: #555;
-  }
-
   /* レスポンシブ対応 */
   @media (max-width: 768px) {
-    .pricing-grid {
-      grid-template-columns: 1fr;
-    }
-    
     .pricing-card.highlight {
       transform: none;
-    }
-    
-    .services-grid {
-      grid-template-columns: 1fr;
-    }
-    
-    .cta-buttons {
-      flex-direction: column;
-      align-items: center;
-    }
-    
-    .cta-button {
-      width: 200px;
     }
   }
 </style>

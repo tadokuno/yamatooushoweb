@@ -9,37 +9,88 @@ import '../styles/global.css';
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <Layout title>アクセス - やまと王将 将棋処</title>
-    <meta name="description" content="将棋処 やまと王将のアクセス情報。東京都新宿区の将棋カフェへの行き方をご案内。" />
+    <Layout />
+    <title>アクセス - やまと王将 将棋処</title>
+    <meta name="description" content="将棋処 やまと王将のアクセス情報。神奈川県大和市の将棋処への行き方をご案内。" />
   </head>
   <body>
     <Header />
     <main>
-      <section class="access">
-        <h1>アクセス</h1>
-        <div class="access-info">
-          <h2>将棋処 やまと王将</h2>
-          <p><strong>住所:</strong> 〒242-0018 神奈川県大和市深見西２丁目-１-２ ホソノビル 2F</p>
-          <p><strong>営業日:</strong> 木・金・土・日および祝日</p>
-          <p><strong>営業時間:</strong> 12:00～19:00</p>
-          <p><strong>電話:</strong> 090-8431-1107</p>
-          <p><strong>最寄り駅:</strong> 小田急線・相鉄線 大和駅 徒歩7分</p>
+      <section class="section">
+        <div class="container">
+          <h1>アクセス</h1>
+          
+          <div class="access-info">
+            <h2>将棋処 やまと王将</h2>
+            <p><strong>住所:</strong> 〒242-0018 神奈川県大和市深見西２丁目-１-２ ホソノビル 2F</p>
+            <p><strong>営業日:</strong> 木・金・土・日および祝日</p>
+            <p><strong>営業時間:</strong> 12:00～19:00</p>
+            <p><strong>電話:</strong> 090-8431-1107</p>
+            <p><strong>最寄り駅:</strong> 小田急線・相鉄線 大和駅 徒歩7分</p>
+          </div>
         </div>
-        <div class="map-container">
+      </section>
+
+      <section class="section section-gray">
+        <div class="container">
           <h2>Googleマップ</h2>
-          <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6498.371040752466!2d139.45959901115296!3d35.474953441164075!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x601856147134272d%3A0x3db2494a376bb0fc!2z44KE44G-44Go546L5bCG!5e0!3m2!1sja!2sjp!4v1750846715752!5m2!1sja!2sjp"
-            width="600"
-            height="1000" 
-            style="border:0;" 
-            allowfullscreen="" 
-            loading="lazy" 
-            referrerpolicy="no-referrer-when-downgrade"
-          ></iframe>
+          <div class="iframe-container">
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6498.371040752466!2d139.45959901115296!3d35.474953441164075!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x601856147134272d%3A0x3db2494a376bb0fc!2z44KE44G-44Go546L5bCG!5e0!3m2!1sja!2sjp!4v1750846715752!5m2!1sja!2sjp"
+              width="600"
+              height="600" 
+              style="border:0;" 
+              allowfullscreen="" 
+              loading="lazy" 
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
         </div>
-        <div class="simple-map">
+      </section>
+
+      <section class="section">
+        <div class="container">
           <h2>簡単な地図</h2>
-          <img src="/images/simple-map.png" alt="やまと王将への地図" width="600" height="400" />
+          <div class="image-container">
+            <img src="/images/simple-map.png" alt="やまと王将への地図" width="600" height="400" />
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-light">
+        <div class="container">
+          <h2>道順・周辺情報</h2>
+          <div class="info-box primary">
+            <h3>大和駅からのアクセス</h3>
+            <p>大和駅から徒歩で７～８分です。</p>
+            <p>ケンタッキーを右に見て、鶴間方面(新宿方向）へ向かってベテルギウスを目標に。</p>
+          </div>
+
+          <div class="grid-2">
+            <div class="card">
+              <h3>🚗 お車でお越しの方</h3>
+              <p>AMANOの大駐車場やタイムズほか多数</p>
+              <p>料金: 24時間450～600円</p>
+            </div>
+
+            <div class="card">
+              <h3>🏪 周辺施設</h3>
+              <p>正面が和食のかごの屋</p>
+              <p>近くにセブン、ローソン、ファミマあり</p>
+            </div>
+          </div>
+
+          <div class="info-box success">
+            <h3>🚲 自転車・バイクについて</h3>
+            <p>自転車・バイクでの来店も可能です</p>
+            <p>（お勧めはできませんが対応しております）</p>
+          </div>
+
+          <div class="visitors-info">
+            <h3>ご来店いただくお客様</h3>
+            <p>やまと王将には県内、都内、遠方からリアル将棋を求めて将棋ファンが来られます。</p>
+            <p>どなたでもお気軽にお越しください！</p>
+          </div>
         </div>
       </section>
     </main>
@@ -48,27 +99,30 @@ import '../styles/global.css';
 </html>
 
 <style>
-  .access {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
+  /* ページ固有のスタイルのみ */
+  .visitors-info {
+    margin-top: 40px;
+    padding: 25px;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
-  .access-info {
-    margin-bottom: 20px;
+
+  .visitors-info h3 {
+    color: #d32f2f;
+    margin-bottom: 15px;
+    font-size: 1.4rem;
   }
-  .map-container,
-  .simple-map {
-    margin: 20px 0;
+
+  .visitors-info p {
+    color: #555;
+    line-height: 1.8;
+    margin-bottom: 10px;
   }
-  .map-container iframe,
-  .simple-map img {
-    max-width: 100%;
-    height: auto;
-  }
-  h1, h2 {
-    color: #333;
-  }
-  p {
-    line-height: 1.6;
+
+  .visitors-info p:last-child {
+    margin-bottom: 0;
+    font-weight: bold;
+    color: #d32f2f;
   }
 </style>
