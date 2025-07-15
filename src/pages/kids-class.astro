@@ -1,0 +1,181 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ReservationForm from '../components/ReservationForm.astro';
+import '../styles/global.css';
+---
+
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <Layout />
+    <meta name="description" content="やまと王将の子供教室。初心者から始められる将棋教室で、楽しく将棋を学べます。体験入学無料！" />
+    <title>子供教室 | やまと王将</title>
+  </head>
+  <body>
+    <Header />
+    <main>
+      <section class="hero">
+        <h1>子供教室</h1>
+        <p class="hero-subtitle">楽しく将棋を始めよう！</p>
+      </section>
+      
+      <section class="section">
+        <div class="container">
+          <h2>初心者から楽しめる将棋教室</h2>
+          <p class="intro-text">
+            初心者向けの教室で、全くの未経験の人、駒の動かし方を知っている程度の人を対象に、将棋を楽しめるレベルまで高めます。
+          </p>
+          <p class="intro-text">
+            何も分かっていなくても大丈夫！一人ひとりのペースに合わせて、丁寧に指導いたします。
+          </p>
+          <p class="intro-text">
+            将棋を通じて、礼儀を学んだり、思考訓練や友達作り、学校の勉強にもきっとお役に立てると思います。
+          </p>
+        </div>
+      </section>
+
+      <section class="section section-gray">
+        <div class="container">
+          <div class="grid-2">
+            <div class="card">
+              <h3>📅 開催スケジュール</h3>
+              <div class="price-item">
+                <span class="price-label">土日</span>
+                <span class="price">10:15 〜 11:45</span>
+              </div>
+              <div class="price-item">
+                <span class="price-label">木曜日</span>
+                <span class="price">16:30 〜 18:00</span>
+              </div>
+              <p style="margin-top: 15px; font-size: 0.9rem; color: #666;">※祝日の開催については事前にご確認ください</p>
+            </div>
+            
+            <div class="card">
+              <h3>💰 月謝</h3>
+              <div class="price-item">
+                <span class="price-label">週1回</span>
+                <span class="price">4,000円</span>
+              </div>
+              <div class="price-item">
+                <span class="price-label">週2回</span>
+                <span class="price">7,000円</span>
+              </div>
+              <div class="info-box success" style="margin-top: 20px;">
+                <strong>🎁 体験入学無料！</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-light">
+        <div class="container">
+          <h2>授業の流れ</h2>
+          <div class="grid-2" style="max-width: 800px; margin: 0 auto;">
+            <div class="card">
+              <h3>1. 講義（10分）</h3>
+              <p>その日のテーマについて分かりやすく説明します</p>
+            </div>
+            <div class="card">
+              <h3>2. 指導対局（80分）</h3>
+              <p>実際に駒を動かしながら、実戦を通して学びます</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <h2>未経験からの学習の進め方</h2>
+          <p style="font-size: 1.1rem; color: #555; margin-bottom: 40px;">
+            未経験の方でも安心して始められるよう、段階的にステップアップしていきます。
+          </p>
+          
+          <div class="grid-3">
+            <div class="card">
+              <h3>🐾 Step 1: どうぶつ将棋</h3>
+              <p>まずはどうぶつ将棋で将棋の感覚をつかみます。楽しく基本ルールを覚えましょう。</p>
+            </div>
+            
+            <div class="card">
+              <h3>Step 2: ５五将棋</h3>
+              <p>王・金・銀・角・飛・歩の6種類の駒を使った５五将棋で、基本的な駒の動きに慣れていきます。</p>
+            </div>
+            
+            <div class="card">
+              <h3>Step 3: 桂・香について学習</h3>
+              <p>桂馬と香車の動きを覚えて、使える駒の種類を増やしていきます。</p>
+            </div>
+            
+            <div class="card">
+              <h3>Step 4: 駒落ち将棋</h3>
+              <p>ハンディキャップをつけた駒落ち将棋で、本格的な将棋を始めます。</p>
+            </div>
+            
+            <div class="card">
+              <h3>Step 5: 平手戦</h3>
+              <p>初級者同士での平手戦で、対等な勝負を楽しめるようになります。</p>
+            </div>
+          </div>
+          
+          <div class="info-box primary" style="margin-top: 40px;">
+            <p><strong>何も分かっていなくても大丈夫！</strong><br>
+            一人ひとりのペースに合わせて進めますので、安心してご参加ください。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-gray">
+        <div class="container">
+          <h2>まずは体験入学から！</h2>
+          <p>体験入学は無料です。将棋が初めてのお子様でも安心してご参加いただけます。</p>
+          <div class="cta-buttons">
+            <button class="cta-button" onclick="openKidsClassReservation()">体験入学を申し込む</button>
+            <a href="tel:090-8431-1107" class="cta-button secondary">電話で問い合わせ</a>
+          </div>
+          <div class="info-box primary" style="margin-top: 30px;">
+            <strong>お問い合わせ：</strong>090-8431-1107<br>
+            営業時間：12:00〜19:00（木・金・土・日・祝日）
+          </div>
+        </div>
+      </section>
+    </main>
+    <ReservationForm />
+    <Footer />
+  </body>
+</html>
+
+<script>
+  // 子供教室専用の予約フォーム開閉
+  function openKidsClassReservation() {
+    if (typeof (window as any).openReservationModal === 'function') {
+      (window as any).openReservationModal(
+        '子供教室体験入学',
+        '希望日をお聞かせください',
+        '土日 10:15-11:45 / 木 16:30-18:00',
+        'kids_class_trial'
+      );
+    } else {
+      // フォールバック：電話案内
+      alert('申し訳ございません。お電話でお申し込みください。\n☎ 090-8431-1107');
+    }
+  }
+  
+  // グローバルスコープに登録
+  (window as any).openKidsClassReservation = openKidsClassReservation;
+</script>
+
+<style>
+  .intro-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 20px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+</style>

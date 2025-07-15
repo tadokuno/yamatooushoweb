@@ -9,7 +9,22 @@
       <button class="close-button" onclick="closeReservationModal()">&times;</button>
     </div>
     
-    <form id="reservation-form" class="reservation-form">
+    <form 
+      id="reservation-form" 
+      name="event-reservation" 
+      method="POST" 
+      data-netlify="true"
+      netlify-honeypot="bot-field"
+      class="reservation-form"
+    >
+      <!-- Netlify Form用の隠しフィールド -->
+      <input type="hidden" name="form-name" value="event-reservation" />
+      
+      <!-- ボット対策（隠しフィールド） -->
+      <p style="display: none;">
+        <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+      </p>
+      
       <div class="form-group">
         <label for="event-title">参加イベント</label>
         <input type="text" id="event-title" name="event_title" readonly>
@@ -60,161 +75,193 @@
         <textarea id="message" name="message" rows="4" placeholder="何かご質問やご要望がございましたらお聞かせください"></textarea>
       </div>
       
+      <!-- 隠しフィールド（送信時に自動設定） -->
+      <input type="hidden" id="event-id" name="event_id" />
+      <input type="hidden" id="event-type" name="event_type" />
+      <input type="hidden" id="submission-time" name="submission_time" />
+      <input type="hidden" id="page-url" name="page_url" />
+      
       <div class="form-actions">
-        <button type="button" class="cancel-button" onclick="closeReservationModal()">キャンセル</button>
-        <button type="submit" class="submit-button">予約を送信</button>
+        <button type="button" class="cta-button secondary" onclick="closeReservationModal()">キャンセル</button>
+        <button type="submit" class="cta-button">予約を送信</button>
       </div>
     </form>
     
     <div id="form-success" class="success-message" style="display: none;">
       <h3>予約を受付いたしました！</h3>
-      <p>ご予約ありがとうございます。確認メールを送信いたしましたのでご確認ください。</p>
+      <p>ご予約ありがとうございます。内容を確認次第、ご連絡いたします。</p>
       <p>ご質問がございましたら、お気軽にお電話ください。</p>
       <p><strong>TEL: 090-8431-1107</strong></p>
-      <button class="close-success-button" onclick="closeReservationModal()">閉じる</button>
+      <button class="cta-button" onclick="closeReservationModal()">閉じる</button>
     </div>
   </div>
 </div>
 
 <script>
-  // HubSpotのポータルIDとフォームIDを設定（実際の値に変更してください）
-  const HUBSPOT_PORTAL_ID = 'YOUR_PORTAL_ID';
-  const HUBSPOT_FORM_ID = 'YOUR_FORM_ID';
-  
-  let currentEventData = {};
+  interface EventData {
+    id: string;
+    title: string;
+    date: string;
+    time: string;
+    type: string;
+  }
 
-  function openReservationModal(eventTitle, eventDate, eventTime, eventId) {
+  let currentEventData: EventData = {
+    id: '',
+    title: '',
+    date: '',
+    time: '',
+    type: ''
+  };
+
+  function openReservationModal(eventTitle: string, eventDate: string, eventTime: string, eventId?: string): void {
     currentEventData = {
-      id: eventId,
+      id: eventId || 'event_' + Date.now(),
       title: eventTitle,
       date: eventDate,
-      time: eventTime
+      time: eventTime,
+      type: getEventType(eventTitle)
     };
     
-    document.getElementById('event-title').value = eventTitle;
-    document.getElementById('event-date').value = `${eventDate} ${eventTime}`;
-    document.getElementById('reservation-modal').style.display = 'flex';
-    document.body.style.overflow = 'hidden';
+    // フォームフィールドに値を設定
+    const eventTitleInput = document.getElementById('event-title') as HTMLInputElement;
+    const eventDateInput = document.getElementById('event-date') as HTMLInputElement;
+    const eventIdInput = document.getElementById('event-id') as HTMLInputElement;
+    const eventTypeInput = document.getElementById('event-type') as HTMLInputElement;
+    
+    if (eventTitleInput) eventTitleInput.value = eventTitle;
+    if (eventDateInput) eventDateInput.value = `${eventDate} ${eventTime}`;
+    if (eventIdInput) eventIdInput.value = currentEventData.id;
+    if (eventTypeInput) eventTypeInput.value = currentEventData.type;
+    
+    // モーダル表示
+    const modal = document.getElementById('reservation-modal') as HTMLElement;
+    if (modal) {
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
   }
 
   // 一般予約（ホームページから）用の関数
-  function openGeneralReservationModal() {
+  function openGeneralReservationModal(): void {
     currentEventData = {
-      id: 'general_reservation',
+      id: 'general_reservation_' + Date.now(),
       title: '通常対局・見学',
       date: '希望日をお聞かせください',
-      time: '営業時間内'
+      time: '営業時間内',
+      type: '通常対局'
     };
     
-    document.getElementById('event-title').value = '通常対局・見学';
-    document.getElementById('event-date').value = '希望日をお聞かせください（営業時間: 12:00-19:00）';
-    document.getElementById('reservation-modal').style.display = 'flex';
-    document.body.style.overflow = 'hidden';
+    // フォームフィールドに値を設定
+    const eventTitleInput = document.getElementById('event-title') as HTMLInputElement;
+    const eventDateInput = document.getElementById('event-date') as HTMLInputElement;
+    const eventIdInput = document.getElementById('event-id') as HTMLInputElement;
+    const eventTypeInput = document.getElementById('event-type') as HTMLInputElement;
+    
+    if (eventTitleInput) eventTitleInput.value = '通常対局・見学';
+    if (eventDateInput) eventDateInput.value = '希望日をお聞かせください（営業時間: 12:00-19:00）';
+    if (eventIdInput) eventIdInput.value = currentEventData.id;
+    if (eventTypeInput) eventTypeInput.value = currentEventData.type;
+    
+    // モーダル表示
+    const modal = document.getElementById('reservation-modal') as HTMLElement;
+    if (modal) {
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
   }
 
   // グローバルスコープに関数を追加
-  window.openReservationModal = openReservationModal;
-  window.openGeneralReservationModal = openGeneralReservationModal;
+  (window as any).openReservationModal = openReservationModal;
+  (window as any).openGeneralReservationModal = openGeneralReservationModal;
 
-  function closeReservationModal() {
-    document.getElementById('reservation-modal').style.display = 'none';
+  function closeReservationModal(): void {
+    const modal = document.getElementById('reservation-modal') as HTMLElement;
+    const form = document.getElementById('reservation-form') as HTMLFormElement;
+    const successMessage = document.getElementById('form-success') as HTMLElement;
+    
+    if (modal) modal.style.display = 'none';
     document.body.style.overflow = 'auto';
-    document.getElementById('reservation-form').style.display = 'block';
-    document.getElementById('form-success').style.display = 'none';
-    document.getElementById('reservation-form').reset();
+    if (form) form.style.display = 'block';
+    if (successMessage) successMessage.style.display = 'none';
+    if (form) form.reset();
   }
 
-  // フォーム送信処理
-  document.getElementById('reservation-form').addEventListener('submit', async function(e) {
-    e.preventDefault();
-    
-    const formData = new FormData(this);
-    const submitButton = document.querySelector('.submit-button');
-    
-    // ボタンを無効化
-    submitButton.textContent = '送信中...';
-    submitButton.disabled = true;
-    
-    try {
-      // Step 1: コンタクトを作成/更新
-      const contactData = {
-        properties: {
-          firstname: formData.get('firstname'),
-          lastname: formData.get('lastname'),
-          email: formData.get('email'),
-          phone: formData.get('phone') || ''
+  // イベントタイプを判定
+  function getEventType(eventTitle: string): string {
+    if (eventTitle.includes('トーナメント')) {
+      return '定例トーナメント';
+    } else if (eventTitle.includes('初心者教室') || eventTitle.includes('子供教室')) {
+      return '初心者教室';
+    } else if (eventTitle.includes('特別')) {
+      return '特別イベント';
+    } else {
+      return '通常対局';
+    }
+  }
+
+  // フォーム送信処理（Netlify Forms用）
+  document.addEventListener('DOMContentLoaded', (): void => {
+    const form = document.getElementById('reservation-form') as HTMLFormElement;
+    if (form) {
+      form.addEventListener('submit', function(e: Event): void {
+        const submitButton = document.querySelector('button[type="submit"]') as HTMLButtonElement;
+        
+        // 送信時の隠しフィールド設定
+        const submissionTimeInput = document.getElementById('submission-time') as HTMLInputElement;
+        const pageUrlInput = document.getElementById('page-url') as HTMLInputElement;
+        
+        if (submissionTimeInput) submissionTimeInput.value = new Date().toISOString();
+        if (pageUrlInput) pageUrlInput.value = window.location.href;
+        
+        // ボタンを無効化
+        if (submitButton) {
+          submitButton.textContent = '送信中...';
+          submitButton.disabled = true;
         }
-      };
-
-      // Step 2: HubSpot API を使用してコンタクトとDealを作成
-      // 注意: 本番環境では、この処理はサーバーサイドで行う必要があります
-      // フロントエンドからAPIキーを使用するのはセキュリティ上推奨されません
-      
-      // 代替案: Webhook URL を使用
-      const webhookData = {
-        // コンタクト情報
-        firstname: formData.get('firstname'),
-        lastname: formData.get('lastname'),
-        email: formData.get('email'),
-        phone: formData.get('phone') || '',
         
-        // イベント情報（Deal用）
-        event_title: formData.get('event_title'),
-        event_datetime: formData.get('event_date'),
-        participant_skill_level: formData.get('skill_level') || '',
-        reservation_notes: formData.get('message') || '',
-        
-        // 追加情報
-        source: 'website_event_reservation',
-        page_url: window.location.href
-      };
-
-      // Webhookエンドポイントに送信（Zapier、Make、またはカスタムサーバー）
-      const response = await fetch('/api/event-reservation', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(webhookData)
+        // Netlify Formsが自動処理するため、fetch不要
+        // 少し遅延させて成功メッセージを表示
+        setTimeout((): void => {
+          const formElement = document.getElementById('reservation-form') as HTMLElement;
+          const successMessage = document.getElementById('form-success') as HTMLElement;
+          
+          if (formElement) formElement.style.display = 'none';
+          if (successMessage) successMessage.style.display = 'block';
+          
+          // Google Analytics イベント（もしあれば）
+          if (typeof (window as any).gtag !== 'undefined') {
+            (window as any).gtag('event', 'reservation_submitted', {
+              event_category: 'form',
+              event_label: currentEventData.title
+            });
+          }
+          
+          // ボタンを復元
+          if (submitButton) {
+            submitButton.textContent = '予約を送信';
+            submitButton.disabled = false;
+          }
+        }, 1000);
       });
+    }
 
-      if (response.ok) {
-        // 成功時の処理
-        document.getElementById('reservation-form').style.display = 'none';
-        document.getElementById('form-success').style.display = 'block';
-        
-        // Google Analytics イベント（もしあれば）
-        if (typeof gtag !== 'undefined') {
-          gtag('event', 'reservation_submitted', {
-            event_category: 'form',
-            event_label: currentEventData.title
-          });
+    // モーダル外クリックで閉じる
+    const modal = document.getElementById('reservation-modal');
+    if (modal) {
+      modal.addEventListener('click', function(e: Event): void {
+        if (e.target === this) {
+          closeReservationModal();
         }
-      } else {
-        throw new Error('送信に失敗しました');
+      });
+    }
+
+    // ESCキーで閉じる
+    document.addEventListener('keydown', function(e: KeyboardEvent): void {
+      if (e.key === 'Escape') {
+        closeReservationModal();
       }
-    } catch (error) {
-      console.error('Error:', error);
-      alert('送信に失敗しました。お手数ですが、お電話でお申し込みください。\nTEL: 090-8431-1107');
-    } finally {
-      // ボタンを復元
-      submitButton.textContent = '予約を送信';
-      submitButton.disabled = false;
-    }
-  });
-
-  // モーダル外クリックで閉じる
-  document.getElementById('reservation-modal').addEventListener('click', function(e) {
-    if (e.target === this) {
-      closeReservationModal();
-    }
-  });
-
-  // ESCキーで閉じる
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-      closeReservationModal();
-    }
+    });
   });
 </script>
 
@@ -278,50 +325,6 @@
     padding: 30px;
   }
 
-  .form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-  }
-
-  .form-group {
-    margin-bottom: 20px;
-  }
-
-  .form-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #333;
-  }
-
-  .required {
-    color: #d32f2f;
-  }
-
-  .form-group input,
-  .form-group select,
-  .form-group textarea {
-    width: 100%;
-    padding: 12px;
-    border: 2px solid #ddd;
-    border-radius: 5px;
-    font-size: 16px;
-    transition: border-color 0.3s;
-  }
-
-  .form-group input:focus,
-  .form-group select:focus,
-  .form-group textarea:focus {
-    outline: none;
-    border-color: #d32f2f;
-  }
-
-  .form-group input[readonly] {
-    background-color: #f5f5f5;
-    color: #666;
-  }
-
   .form-hint {
     font-size: 0.8rem;
     color: #666;
@@ -334,40 +337,6 @@
     gap: 15px;
     justify-content: flex-end;
     margin-top: 30px;
-  }
-
-  .cancel-button,
-  .submit-button {
-    padding: 12px 24px;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-
-  .cancel-button {
-    background-color: #666;
-    color: white;
-  }
-
-  .cancel-button:hover {
-    background-color: #555;
-  }
-
-  .submit-button {
-    background-color: #d32f2f;
-    color: white;
-  }
-
-  .submit-button:hover {
-    background-color: #b71c1c;
-  }
-
-  .submit-button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
   }
 
   .success-message {
@@ -384,22 +353,6 @@
     margin-bottom: 15px;
     line-height: 1.6;
     color: #555;
-  }
-
-  .close-success-button {
-    background-color: #d32f2f;
-    color: white;
-    padding: 12px 30px;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    margin-top: 20px;
-  }
-
-  .close-success-button:hover {
-    background-color: #b71c1c;
   }
 
   /* レスポンシブ対応 */
@@ -420,18 +373,8 @@
       padding: 20px;
     }
 
-    .form-row {
-      grid-template-columns: 1fr;
-      gap: 0;
-    }
-
     .form-actions {
       flex-direction: column;
-    }
-
-    .cancel-button,
-    .submit-button {
-      width: 100%;
     }
 
     .success-message {

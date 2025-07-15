@@ -1,10 +1,10 @@
 ---
 // src/components/BusinessCalendar.astro
-const currentYear = 2025;
-const currentMonth = 7; // 7月
+const currentYear:number = 2025;
+const currentMonth:number = 7; // 7月
 
 // 営業日の設定（簡単に更新できるように配列で管理）
-const businessDays = {
+const businessDays: Record<string, number[]>  = {
   '2025-7': [3, 5, 6, 8, 12, 13, 17, 19, 20, 21, 24, 26, 27, 31],
   '2025-8': [2, 3, 7, 8, 9, 10, 14, 15, 16, 17, 23, 24, 28, 29, 30, 31],
   // 新しい月を追加する場合はここに追加
@@ -18,7 +18,7 @@ const months = [
 const weekdays = ['日', '月', '火', '水', '木', '金', '土'];
 
 // カレンダー生成関数
-function generateCalendar(year, month) {
+function generateCalendar(year:number, month:number) {
   const monthKey = `${year}-${month}`;
   const businessDaysForMonth = businessDays[monthKey] || [];
   
