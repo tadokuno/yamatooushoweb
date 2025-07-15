@@ -31,22 +31,22 @@
       </div>
       
       <div class="form-group">
-        <label for="event-date">開催日時</label>
-        <input type="text" id="event-date" name="event_date" readonly>
-        <small class="form-hint">※通常対局の場合は、ご希望の日時をメッセージ欄にご記入ください</small>
+        <label for="event-date">希望日時 <span class="required">*</span></label>
+        <input type="text" id="event-date" name="event_date" required placeholder="例：7月28日 午後2時から、土曜日の午前中など">
+        <small class="form-hint">ご希望の日時を自由にご記入ください</small>
       </div>
       
       <div class="form-row">
         <div class="form-group">
-          <label for="last-name">姓 <span class="required">*</span></label>
-          <input type="text" id="last-name" name="lastname" required>
+          <label for="lastname">姓 <span class="required">*</span></label>
+          <input type="text" id="lastname" name="lastname" required>
         </div>
         <div class="form-group">
-          <label for="first-name">名 <span class="required">*</span></label>
-          <input type="text" id="first-name" name="firstname" required>
+          <label for="firstname">名 <span class="required">*</span></label>
+          <input type="text" id="firstname" name="firstname" required>
         </div>
       </div>
-      
+            
       <div class="form-group">
         <label for="email">メールアドレス <span class="required">*</span></label>
         <input type="email" id="email" name="email" required>
@@ -130,7 +130,7 @@
     const eventTypeInput = document.getElementById('event-type') as HTMLInputElement;
     
     if (eventTitleInput) eventTitleInput.value = eventTitle;
-    if (eventDateInput) eventDateInput.value = `${eventDate} ${eventTime}`;
+    //if (eventDateInput) eventDateInput.value = `${eventDate} ${eventTime}`;
     if (eventIdInput) eventIdInput.value = currentEventData.id;
     if (eventTypeInput) eventTypeInput.value = currentEventData.type;
     
@@ -186,7 +186,8 @@
     if (successMessage) successMessage.style.display = 'none';
     if (form) form.reset();
   }
-
+  (window as any).closeReservationModal = closeReservationModal;
+  
   // イベントタイプを判定
   function getEventType(eventTitle: string): string {
     if (eventTitle.includes('トーナメント')) {
