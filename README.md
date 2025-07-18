@@ -1,4 +1,4 @@
-# Astro Starter Kit: Basics
+# やまと王将のホームページ
 
 ```sh
 npm create astro@latest -- --template basics
