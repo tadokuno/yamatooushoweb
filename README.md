@@ -1,5 +1,6 @@
 # やまと王将のホームページ
 
+Astro Starter Kitを使って作成
 ```sh
 npm create astro@latest -- --template basics
 ```
@@ -10,7 +11,7 @@ npm create astro@latest -- --template basics
 
 > 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+
 
 ## 🚀 Project Structure
 
@@ -18,13 +19,20 @@ Inside of your Astro project, you'll see the following folders and files:
 
 ```text
 /
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
+├── public/     静的ファイル (html/jpg/png など)
+│   ├── images/ 画像ファイル
+│   └── favicon.png
+├── src/        astroファイル
+│   ├── layouts/ レイアウトの定義
+│   │   └── Layout.astro ファビコンなど共通部分
+│   ├── components/ importして使用するコンポーネント
+│   │   ├── Header.astro
+│   │   ├── Footer.astro
+│   │   ├── ...
+│   ├── pages/ 各ページの定義
+│   |   ├── index.astro　トップページ
+│   │   ├── about.astro
+│   │   ├── ...
 └── package.json
 ```
 
