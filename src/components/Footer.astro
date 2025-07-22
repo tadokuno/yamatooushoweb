@@ -1,13 +1,20 @@
+---
+import businessData from '../data/businessProperties.json';
+import type { BusinessData } from '../types/businessData';
+
+const data = businessData as BusinessData;
+---
+
 <footer>
   <div class="footer-container">
     <div class="footer-info">
       <h3>将棋処 やまと王将</h3>
       <div class="footer-details">
-        <p class="address">〒242-0018 神奈川県大和市深見西２丁目-１-２ ホソノビル 2F</p>
-        <p class="hours">営業時間: 12:00～19:00</p>
+        <p class="address">{data.contactInfo.address}</p>
+        <p class="hours">営業時間: {data.businessInfo.hours}</p>
         <p class="contact">
-          <span class="phone">☎ 090-8431-1107</span>
-          <span class="email">yamatoousho@gmail.com</span>
+          <span class="phone">☎ {data.contactInfo.phone}</span>
+          <span class="email">{data.contactInfo.email}</span>
         </p>
       </div>
     </div>

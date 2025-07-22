@@ -1,5 +1,9 @@
 ---
 // src/components/ContactForm.astro
+import businessData from '../data/businessProperties.json';
+import type { BusinessData } from '../types/businessData';
+
+const data = businessData as BusinessData;
 ---
 
 <div id="contact-modal" class="modal">
@@ -79,7 +83,7 @@
       <h3>お問い合わせを受付いたしました！</h3>
       <p>お問い合わせありがとうございます。内容を確認の上、お返事いたします。</p>
       <p>お急ぎの場合は、お気軽にお電話ください。</p>
-      <p><strong>TEL: 090-8431-1107</strong></p>
+      <p><strong>TEL: {data.contactInfo.phone}</strong></p>
       <button class="close-success-button" onclick="closeContactModal()">閉じる</button>
     </div>
   </div>

@@ -5,8 +5,11 @@ import Footer from '../components/Footer.astro';
 import ContactForm from '../components/ContactForm.astro';
 import '../styles/global.css';
 import events from '../data/events.json';
+import businessData from '../data/businessProperties.json';
+import type { BusinessData } from '../types/businessData';
 
-const sortedEvents = events.sort((a, b) => new Date(b.date) - new Date(a.date));
+const data = businessData as BusinessData;
+const sortedEvents = events.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 const upcomingEvents = sortedEvents.filter(event => event.status === 'upcoming');
 const pastEvents = sortedEvents.filter(event => event.status === 'past');
 ---
@@ -98,7 +101,7 @@ const pastEvents = sortedEvents.filter(event => event.status === 'past');
             </div>
             <div class="card">
               <h3>お問い合わせ</h3>
-              <p><strong>電話:</strong> 090-8431-1107<br><strong>X:</strong> @yamatoousho</p>
+              <p><strong>電話:</strong> {data.contactInfo.phone}<br><strong>X:</strong> @yamatoousho</p>
             </div>
           </div>
         </div>

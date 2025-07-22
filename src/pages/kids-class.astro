@@ -4,6 +4,10 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import ReservationForm from '../components/ReservationForm.astro';
 import '../styles/global.css';
+import businessData from '../data/businessProperties.json';
+import type { BusinessData } from '../types/businessData';
+
+const data = businessData as BusinessData;
 ---
 
 <html lang="ja">
@@ -16,6 +20,7 @@ import '../styles/global.css';
   </head>
   <body>
     <Header />
+    <div data-phone="{data.contactInfo.phone}" id="contact-data" style="display: none;"></div>
     <main>
       <section class="hero">
         <h1>子供教室</h1>
@@ -134,11 +139,11 @@ import '../styles/global.css';
           <p>体験入学は無料です。将棋が初めてのお子様でも安心してご参加いただけます。</p>
           <div class="cta-buttons">
             <button class="cta-button" onclick="openKidsClassReservation()">体験入学を申し込む</button>
-            <a href="tel:090-8431-1107" class="cta-button secondary">電話で問い合わせ</a>
+            <a href={`tel:${data.contactInfo.phone}`} class="cta-button secondary">電話で問い合わせ</a>
           </div>
           <div class="info-box primary" style="margin-top: 30px;">
-            <strong>お問い合わせ：</strong>090-8431-1107<br>
-            営業時間：12:00〜19:00（木・金・土・日・祝日）
+            <strong>お問い合わせ：</strong>{data.contactInfo.phone}<br>
+            営業時間：{data.businessInfo.hours}（{data.businessInfo.regularDays}）
           </div>
         </div>
       </section>
@@ -160,7 +165,8 @@ import '../styles/global.css';
       );
     } else {
       // フォールバック：電話案内
-      alert('申し訳ございません。お電話でお申し込みください。\n☎ 090-8431-1107');
+      const phoneNumber = document.getElementById('contact-data')?.getAttribute('data-phone') || '090-8431-1107';
+      alert(`申し訳ございません。お電話でお申し込みください。\n☎ ${phoneNumber}`);
     }
   }
   

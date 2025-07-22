@@ -1,5 +1,9 @@
 ---
 // src/components/ReservationForm.astro
+import businessData from '../data/businessProperties.json';
+import type { BusinessData } from '../types/businessData';
+
+const data = businessData as BusinessData;
 ---
 
 <div id="reservation-modal" class="modal">
@@ -91,7 +95,7 @@
       <h3>予約を受付いたしました！</h3>
       <p>ご予約ありがとうございます。内容を確認次第、ご連絡いたします。</p>
       <p>ご質問がございましたら、お気軽にお電話ください。</p>
-      <p><strong>TEL: 090-8431-1107</strong></p>
+      <p><strong>TEL: {data.contactInfo.phone}</strong></p>
       <button class="cta-button" onclick="closeReservationModal()">閉じる</button>
     </div>
   </div>

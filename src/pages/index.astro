@@ -5,6 +5,10 @@ import Footer from '../components/Footer.astro';
 import ContactForm from '../components/ContactForm.astro';
 import BusinessCalendar from '../components/BusinessCalendar.astro';
 import '../styles/global.css';
+import businessData from '../data/businessProperties.json';
+import type { BusinessData } from '../types/businessData';
+
+const data = businessData as BusinessData;
 ---
 
 <html lang="ja">
@@ -23,8 +27,8 @@ import '../styles/global.css';
       
       <section class="section">
         <div class="container">
-          <h2>ようこそ、将棋処 やまと王将へ</h2>
-          <p class="intro-text">初心者から上級者まで、将棋を愛するすべての人に開かれた将棋処です。気軽に対局を楽しんだり、トーナメントで力試しを楽しむこともできます。</p>
+          <h2>ようこそ、<ruby>将棋処<rt>しょうぎどころ</rt></ruby> やまと王将へ</h2>
+          <p class="intro-text">初心者から上級者まで、将棋を愛するすべての人に開かれた<ruby>将棋処<rt>しょうぎどころ</rt></ruby>です。気軽に対局を楽しんだり、トーナメントで力試しを楽しむこともできます。</p>
         </div>
       </section>
       
@@ -43,7 +47,7 @@ import '../styles/global.css';
       <section class="section">
         <div class="container">
           <h2>お知らせ</h2>
-          <p>7月19日からの3連休は定例トーナメント開催!</p>
+          <p>土日は毎週定例トーナメント開催!</p>
           <p>いずれも、午後1時からトーナメントを開始します。営業開始は正午です。</p>
         </div>
       </section>
@@ -52,11 +56,11 @@ import '../styles/global.css';
         <div class="container">
           <h2>アクセス</h2>
           <div class="access-info">
-            <h2>将棋処 やまと王将</h2>
-            <p><strong>住所:</strong> 〒242-0018 神奈川県大和市深見西2丁目-1-2 ホソノビル 2F</p>
-            <p><strong>営業日:</strong> 木・金・土・日および祝日</p>
-            <p><strong>営業時間:</strong> 12:00~19:00</p>
-            <p><strong>電話:</strong> 090-8431-1107</p>
+            <h2><ruby>将棋処<rt>しょうぎどころ</rt></ruby> やまと王将</h2>
+            <p><strong>住所:</strong> {data.contactInfo.address}</p>
+            <p><strong>営業日:</strong> {data.businessInfo.regularDays}</p>
+            <p><strong>営業時間:</strong> {data.businessInfo.hours}</p>
+            <p><strong>電話:</strong> {data.contactInfo.phone}</p>
             <p><strong>最寄り駅:</strong> 小田急線・相鉄線 大和駅 徒歩7分</p>
           </div>
           
@@ -87,7 +91,7 @@ import '../styles/global.css';
       <section class="section section-gray">
         <div class="container">
           <h2>営業日カレンダー</h2>
-          <p>やまと王将 将棋処の営業日をチェック!月曜定休、13:00~19:00(臨時休業はカレンダーで確認)。</p>
+          <p>やまと王将 <ruby>将棋処<rt>しょうぎどころ</rt></ruby>の営業日をチェック!月曜定休、13:00~19:00(臨時休業はカレンダーで確認)。</p>
           <div class="iframe-container">
             <BusinessCalendar />
           </div>
@@ -111,6 +115,16 @@ import '../styles/global.css';
     text-align: center;
     max-width: 800px;
     margin: 0 auto;
+  }
+
+  /* ルビのスタイル */
+  ruby {
+    ruby-align: center;
+  }
+
+  rt {
+    font-size: 0.4em;
+    color: #666;
   }
 
   .x-button {
