@@ -43,7 +43,15 @@ const data = businessData as BusinessData;
           </a>
         </div>
       </section>
-      
+      <section class="section section-gray">
+        <div class="container">
+          <h2>営業日カレンダー</h2>
+          <p>やまと王将 <ruby>将棋処<rt>しょうぎどころ</rt></ruby>の営業日をチェック!</p>
+          <div class="iframe-container">
+            <BusinessCalendar />
+          </div>
+        </div>
+      </section>
       <section class="section">
         <div class="container">
           <h2>お知らせ</h2>
@@ -85,21 +93,12 @@ const data = businessData as BusinessData;
               <img src="/images/simple-map.png" alt="やまと王将への地図" />
             </div>
           </div>
-        </div>
-      </section>
-      
-      <section class="section section-gray">
-        <div class="container">
-          <h2>営業日カレンダー</h2>
-          <p>やまと王将 <ruby>将棋処<rt>しょうぎどころ</rt></ruby>の営業日をチェック!月曜定休、13:00~19:00(臨時休業はカレンダーで確認)。</p>
-          <div class="iframe-container">
-            <BusinessCalendar />
-          </div>
           <div class="calendar-cta">
             <button class="cta-button" onclick="openContactModal()">お問い合わせ</button>
           </div>
         </div>
       </section>
+      
     </main>
     <ContactForm />
     <Footer />
