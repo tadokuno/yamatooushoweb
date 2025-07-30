@@ -1,9 +1,12 @@
 ---
 const { title, description } = Astro.props;
+
+// Google Analytics Measurement ID（環境変数から取得、デフォルト値は設定例）
+const GA_MEASUREMENT_ID = import.meta.env.PUBLIC_GA_MEASUREMENT_ID || 'G-XXXXXXXXXX';
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="ja">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
@@ -12,6 +15,22 @@ const { title, description } = Astro.props;
     	<link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
 		<meta name="generator" content={Astro.generator} />
 		<title>やまと王将 - 将棋処</title>
+		
+		<!-- Google Analytics (GA4) -->
+		{GA_MEASUREMENT_ID && GA_MEASUREMENT_ID !== 'G-XXXXXXXXXX' && (
+			<>
+				<script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}></script>
+				<script is:inline define:vars={{ GA_MEASUREMENT_ID }}>
+					window.dataLayer = window.dataLayer || [];
+					function gtag(){dataLayer.push(arguments);}
+					gtag('js', new Date());
+					gtag('config', GA_MEASUREMENT_ID, {
+						page_title: document.title,
+						page_location: window.location.href,
+					});
+				</script>
+			</>
+		)}
 	</head>
 	<body>
 		<slot />
