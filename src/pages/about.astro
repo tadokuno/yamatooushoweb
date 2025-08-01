@@ -4,10 +4,16 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import ContactForm from '../components/ContactForm.astro';
 import '../styles/global.css';
+
+// SEO設定
+const seoData = {
+  title: "やまと王将について | 将棋処やまと王将の歴史と理念",
+  description: "将棋処やまと王将の歴史、理念、席主紹介。初心者から上級者まで歓迎する将棋道場として、地域の将棋文化を支えています。",
+  image: "/images/yamatoosho.png"
+};
 ---
 
-<html lang="ja">
-  <head>
+<Layout title={seoData.title} description={seoData.description} image={seoData.image}>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <Layout />

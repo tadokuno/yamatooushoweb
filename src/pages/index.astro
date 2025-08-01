@@ -9,16 +9,18 @@ import businessData from '../data/businessProperties.json';
 import type { BusinessData } from '../types/businessData';
 
 const data = businessData as BusinessData;
+
+// SEO設定
+const seoData = {
+  title: "やまと王将 - 将棋処 | 神奈川県大和市の将棋道場",
+  description: "神奈川県大和市の将棋処やまと王将。初心者から上級者まで楽しめる将棋道場です。毎週土日にトーナメント開催中。大和駅徒歩7分でアクセス良好。",
+  image: "/images/yamatoosho.png"
+};
+---
+const data = businessData as BusinessData;
 ---
 
-<html lang="ja">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <Layout />
-    <meta name="description" content="やまと王将は、初心者から上級者まで楽しめる将棋処です。" />
-  </head>
-  <body>
+<Layout title={seoData.title} description={seoData.description} image={seoData.image}>
     <Header />
     <main>
       <section class="hero">
@@ -105,8 +107,7 @@ const data = businessData as BusinessData;
     </main>
     <ContactForm />
     <Footer />
-  </body>
-</html>
+</Layout>
 
 <style>
   /* ページ固有のスタイルのみ */
