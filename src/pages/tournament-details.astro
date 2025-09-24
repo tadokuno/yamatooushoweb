@@ -1,0 +1,194 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ContactForm from '../components/ContactForm.astro';
+import '../styles/global.css';
+
+// SEO設定
+const seoData = {
+  title: "トーナメント詳細 | やまと王将",
+  description: "やまと王将のトーナメント実施要項。全ての方が参加でき、棋力差に応じた手合いで対戦。土日定例開催中。",
+  image: "/images/yamatoosho.png"
+};
+---
+
+<Layout title={seoData.title} description={seoData.description} image={seoData.image}>
+  <Header />
+  <main>
+    <section class="hero">
+      <h1>やまと王将トーナメント実施要項</h1>
+    </section>
+    
+    <section class="section">
+      <div class="container">
+        <div class="tournament-rules card">
+          <h2>参加について</h2>
+          <p><strong>トーナメントには全ての方が参加できます。</strong></p>
+          <p>棋力差がある場合には、駒落ちとなります。手合いは席主が最終的に決定しますが、基本的に、やまと王将手合い表に基づきます。</p>
+        </div>
+
+        <div class="tournament-rules card">
+          <h2>対戦組み合わせの決定方法</h2>
+          <ol class="rules-list">
+            <li>入場の際に、くじを引いて頂きます。</li>
+            <li>そのくじには番号が記入されていますので、その番号が大きい方から右から左の順にトーナメントの対戦が決まります。</li>
+            <li>トーナメント開始後に来た方は、そのまま左に入ります。</li>
+          </ol>
+        </div>
+
+        <div class="tournament-rules card">
+          <h2>対戦相手がいない場合</h2>
+          <p>対戦相手がいない場合は、敗者の同棋力の方を試合数調整として対戦します。</p>
+          <ul class="check-list">
+            <li><strong>試合数調整で負けた場合：</strong> そこで終わります。</li>
+            <li><strong>試合数調整で勝った場合：</strong> 上に上がります。</li>
+          </ul>
+        </div>
+
+        <div class="tournament-rules card">
+          <h2>2回戦以降</h2>
+          <p>2回戦以降は、トーナメントの組み合わせに関わらず、<strong>先に勝った方同士で対戦</strong>する形になります。</p>
+        </div>
+
+        <div class="tournament-info card highlight">
+          <h2>開催情報</h2>
+          <div class="info-grid">
+            <div class="info-item">
+              <h3>開催日</h3>
+              <p>毎週土日,祝祭日</p>
+            </div>
+            <div class="info-item">
+              <h3>開始時間</h3>
+              <p>午後1時から</p>
+            </div>
+            <div class="info-item">
+              <h3>営業開始</h3>
+              <p>正午から</p>
+            </div>
+            <div class="info-item">
+              <h3>参加費</h3>
+              <p>席料に含まれます</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="cta-section">
+          <h2>トーナメントに参加しませんか？</h2>
+          <p>初心者の方も上級者の方も、棋力に応じた手合いで楽しく対戦できます。</p>
+          <div class="cta-buttons">
+            <button class="cta-button" onclick="openContactModal()">お問い合わせ</button>
+            <a href="/services" class="cta-button secondary">料金・サービス一覧</a>
+            <a href="/access" class="cta-button secondary">アクセス情報</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <ContactForm />
+  <Footer />
+</Layout>
+
+<style>
+  .tournament-rules {
+    margin-bottom: 2rem;
+  }
+
+  .tournament-rules h2 {
+    color: #d32f2f;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+  }
+
+  .tournament-rules.highlight {
+    border: 3px solid #d32f2f;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  }
+
+  .rules-list {
+    list-style: none;
+    counter-reset: rule-counter;
+    padding-left: 0;
+  }
+
+  .rules-list li {
+    counter-increment: rule-counter;
+    margin-bottom: 1rem;
+    padding-left: 2rem;
+    position: relative;
+  }
+
+  .rules-list li::before {
+    content: counter(rule-counter);
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: #d32f2f;
+    color: white;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.8rem;
+  }
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+  }
+
+  .info-item h3 {
+    color: #d32f2f;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+  }
+
+  .info-item p {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin: 0;
+  }
+
+  .cta-section {
+    text-align: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border-radius: 8px;
+    margin-top: 2rem;
+  }
+
+  .cta-section h2 {
+    color: #d32f2f;
+    margin-bottom: 1rem;
+  }
+
+  .check-list li strong {
+    color: #d32f2f;
+  }
+
+  /* レスポンシブ対応 */
+  @media (max-width: 768px) {
+    .rules-list li {
+      padding-left: 2.5rem;
+    }
+
+    .info-grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .cta-buttons {
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .cta-buttons .cta-button {
+      width: 100%;
+    }
+  }
+</style>

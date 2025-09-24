@@ -6,7 +6,8 @@ export async function GET() {
     { url: '/events', lastmod: '2025-08-01', changefreq: 'weekly', priority: '0.9' },
     { url: '/access', lastmod: '2025-08-01', changefreq: 'monthly', priority: '0.7' },
     { url: '/kids-class', lastmod: '2025-08-01', changefreq: 'monthly', priority: '0.7' },
-    { url: '/rules', lastmod: '2025-08-01', changefreq: 'yearly', priority: '0.5' }
+    { url: '/rules', lastmod: '2025-08-01', changefreq: 'yearly', priority: '0.5' },
+    { url: '/tournament-details', lastmod: '2025-09-24', changefreq: 'monthly', priority: '0.8' }
   ];
 
   const siteUrl = 'https://yamatoosho.netlify.app';
