@@ -1,11 +1,11 @@
 [
   {
     "id": 1,
-    "title": "やまと王将リニューアルオープン記念トーナメント",
+    "title": "（中止）やまと王将リニューアルオープン記念トーナメント",
     "date": "2025-11-03",
     "time": "10:00-20:00",
-    "description": "将棋処やまと王将の継続を祝うトーナメント。豪華賞品あり！",
+    "description": "こちらのイベントは、都合により中止となりました",
     "image": "/images/event1.jpg",
-    "status": "upcoming"
+    "status": "cancelled"
   }  
 ]
