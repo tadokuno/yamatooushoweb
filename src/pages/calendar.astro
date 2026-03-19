@@ -1,0 +1,168 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import BusinessCalendar from '../components/BusinessCalendar.astro';
+import '../styles/global.css';
+
+// SEO設定
+const seoData = {
+  title: "営業日カレンダー - やまと王将 | 将棋処 | 神奈川県大和市",
+  description: "将棋処やまと王将の営業日カレンダーをご確認いただけます。営業時間や休業日の詳細情報もこちらでチェック。",
+  image: "/images/yamatoosho.png"
+};
+---
+
+<Layout title={seoData.title} description={seoData.description} image={seoData.image}>
+  <Header />
+  
+  <main>
+    <section class="hero-calendar">
+      <div class="container">
+        <h1>営業日カレンダー</h1>
+        <p class="hero-description">将棋処やまと王将の営業日をご確認いただけます</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <BusinessCalendar />
+      </div>
+    </section>
+
+    <section class="section section-gray">
+      <div class="container">
+        <h2>お知らせ</h2>
+        <div class="notice-content">
+          <p>📅 <strong>営業日について</strong></p>
+          <ul>
+            <li>基本営業日：木・金・土・日・祝日（平日は第２・第４週のみ）</li>
+            <li>営業時間：12:00～19:00（平日は13:00～19:00）</li>
+            <li>臨時休業がある場合は上記カレンダーをご確認ください</li>
+          </ul>
+          
+          <p>📞 <strong>お問い合わせ</strong></p>
+          <p>営業日やイベントに関するご質問は、お気軽にお電話またはメールでお問い合わせください。</p>
+          <div class="contact-links">
+            <a href="tel:090-8431-1107" class="contact-button">📞 090-8431-1107</a>
+            <a href="mailto:yamatoousho@gmail.com" class="contact-button">✉️ メールで問い合わせ</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .hero-calendar {
+    background: linear-gradient(135deg, #1a5bb8 0%, #2c7cd1 100%);
+    color: white;
+    padding: 60px 0;
+    text-align: center;
+  }
+
+  .hero-calendar h1 {
+    font-size: 2.5rem;
+    margin: 0 0 16px 0;
+    font-weight: bold;
+  }
+
+  .hero-description {
+    font-size: 1.2rem;
+    margin: 0;
+    opacity: 0.9;
+  }
+
+  .notice-content {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: left;
+  }
+
+  .notice-content h3 {
+    color: #1a5bb8;
+    margin-top: 30px;
+    margin-bottom: 15px;
+  }
+
+  .notice-content h3:first-child {
+    margin-top: 0;
+  }
+
+  .notice-content ul {
+    margin-left: 20px;
+    margin-bottom: 25px;
+  }
+
+  .notice-content li {
+    margin: 8px 0;
+    line-height: 1.6;
+  }
+
+  .contact-links {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+  }
+
+  .contact-button {
+    display: inline-block;
+    padding: 12px 24px;
+    background: #1a5bb8;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    border: 2px solid #1a5bb8;
+  }
+
+  .contact-button:hover {
+    background: white;
+    color: #1a5bb8;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(26, 91, 184, 0.2);
+  }
+
+  /* レスポンシブ対応 */
+  @media (max-width: 768px) {
+    .hero-calendar {
+      padding: 40px 0;
+    }
+
+    .hero-calendar h1 {
+      font-size: 2rem;
+    }
+
+    .hero-description {
+      font-size: 1.1rem;
+    }
+
+    .notice-content {
+      padding: 20px;
+    }
+
+    .contact-links {
+      flex-direction: column;
+    }
+
+    .contact-button {
+      text-align: center;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero-calendar h1 {
+      font-size: 1.7rem;
+    }
+
+    .hero-description {
+      font-size: 1rem;
+    }
+  }
+</style>
