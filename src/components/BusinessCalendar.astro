@@ -3,6 +3,14 @@
 import businessData from '../data/businessProperties.json';
 import type { BusinessData } from '../types/businessData';
 
+// propsの型定義
+interface Props {
+  monthsCount?: number; // 表示する月数（デフォルト: 3）
+}
+
+// propsを受け取り
+const { monthsCount = 3 } = Astro.props;
+
 // 現在の日付を取得
 const now = new Date();
 const currentYear: number = now.getFullYear();
@@ -65,62 +73,55 @@ function generateCalendar(year:number, month:number) {
   return calendarDays;
 }
 
-// 当月と翌月のカレンダーを生成
-const currentCalendar = generateCalendar(currentYear, currentMonth);
-const nextMonth = currentMonth === 12 ? 1 : currentMonth + 1;
-const nextYear = currentMonth === 12 ? currentYear + 1 : currentYear;
-const nextCalendar = generateCalendar(nextYear, nextMonth);
+// 指定された月数分のカレンダーを生成
+const calendars = [];
+let year = currentYear;
+let month = currentMonth;
+
+for (let i = 0; i < monthsCount; i++) {
+  calendars.push({
+    year,
+    month,
+    calendar: generateCalendar(year, month)
+  });
+  
+  // 次の月を計算
+  month++;
+  if (month > 12) {
+    month = 1;
+    year++;
+  }
+}
 ---
 
-<div class="business-calendar">
+<div class="business-calendar" data-months={monthsCount}>
   <div class="calendar-header">
     <h3 class="main-title">○が営業日</h3>
   </div>
   
   <div class="calendars-container">
-    <!-- 当月のカレンダー -->
-    <div class="calendar-month">
-      <h4 class="month-year">
-        '{currentYear % 100}.{months[currentMonth - 1]}度
-      </h4>
-      
-      <div class="calendar-grid">
-        {weekdays.map((day, index) => (
-          <div class={`weekday ${index === 0 ? 'sunday' : index === 6 ? 'saturday' : ''}`}>
-            {day}
-          </div>
-        ))}
+    {calendars.map((cal) => (
+      <div class="calendar-month">
+        <h4 class="month-year">
+          '{cal.year % 100}.{months[cal.month - 1]}度
+        </h4>
         
-        {currentCalendar.map((day, index) => (
-          <div class={`calendar-day ${!day.isCurrentMonth ? 'other-month' : ''} ${day.isBusinessDay ? 'business-day' : ''}`}>
-            <span class="date-number">{day.date}</span>
-            {day.isBusinessDay && <div class="business-circle"></div>}
-          </div>
-        ))}
+        <div class="calendar-grid">
+          {weekdays.map((day, index) => (
+            <div class={`weekday ${index === 0 ? 'sunday' : index === 6 ? 'saturday' : ''}`}>
+              {day}
+            </div>
+          ))}
+          
+          {cal.calendar.map((day, index) => (
+            <div class={`calendar-day ${!day.isCurrentMonth ? 'other-month' : ''} ${day.isBusinessDay ? 'business-day' : ''}`}>
+              <span class="date-number">{day.date}</span>
+              {day.isBusinessDay && <div class="business-circle"></div>}
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
-
-    <!-- 翌月のカレンダー -->
-    <div class="calendar-month">
-      <h4 class="month-year">
-        '{nextYear % 100}.{months[nextMonth - 1]}度
-      </h4>
-      
-      <div class="calendar-grid">
-        {weekdays.map((day, index) => (
-          <div class={`weekday ${index === 0 ? 'sunday' : index === 6 ? 'saturday' : ''}`}>
-            {day}
-          </div>
-        ))}
-        
-        {nextCalendar.map((day, index) => (
-          <div class={`calendar-day ${!day.isCurrentMonth ? 'other-month' : ''} ${day.isBusinessDay ? 'business-day' : ''}`}>
-            <span class="date-number">{day.date}</span>
-            {day.isBusinessDay && <div class="business-circle"></div>}
-          </div>
-        ))}
-      </div>
-    </div>
+    ))}
   </div>
   
   <div class="calendar-info">
@@ -154,9 +155,16 @@ const nextCalendar = generateCalendar(nextYear, nextMonth);
 
   .calendars-container {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 30px;
+    gap: 20px;
     margin-bottom: 30px;
+  }
+
+  .business-calendar[data-months="2"] .calendars-container {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .business-calendar[data-months="3"] .calendars-container {
+    grid-template-columns: 1fr 1fr 1fr;
   }
 
   .calendar-month {
@@ -261,6 +269,17 @@ const nextCalendar = generateCalendar(nextYear, nextMonth);
   }
 
   /* レスポンシブ対応 */
+  @media (max-width: 1024px) {
+    .calendars-container {
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    
+    .business-calendar[data-months="3"] .calendar-month:nth-child(3) {
+      grid-column: 1 / -1;
+    }
+  }
+
   @media (max-width: 768px) {
     .business-calendar {
       padding: 15px;
