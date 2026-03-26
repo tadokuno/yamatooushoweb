@@ -269,14 +269,33 @@ for (let i = 0; i < monthsCount; i++) {
   }
 
   /* レスポンシブ対応 */
-  @media (max-width: 1024px) {
-    .calendars-container {
+  @media (max-width: 1200px) {
+    .calendars-container,
+    .business-calendar[data-months="2"] .calendars-container,
+    .business-calendar[data-months="3"] .calendars-container {
       grid-template-columns: 1fr 1fr;
       gap: 20px;
     }
     
     .business-calendar[data-months="3"] .calendar-month:nth-child(3) {
       grid-column: 1 / -1;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .business-calendar {
+      padding: 15px;
+    }
+
+    .main-title {
+      font-size: 1.6rem;
+    }
+
+    .calendars-container,
+    .business-calendar[data-months="2"] .calendars-container,
+    .business-calendar[data-months="3"] .calendars-container {
+      grid-template-columns: 1fr !important;
+      gap: 20px;
     }
   }
 
@@ -287,11 +306,6 @@ for (let i = 0; i < monthsCount; i++) {
 
     .main-title {
       font-size: 1.5rem;
-    }
-
-    .calendars-container {
-      grid-template-columns: 1fr;
-      gap: 20px;
     }
 
     .calendar-month {
